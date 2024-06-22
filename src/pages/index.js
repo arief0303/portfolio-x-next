@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import React, { useRef, useEffect } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { OrbitControls, MarchingCubes, MarchingCube, MeshTransmissionMaterial, Environment, Bounds, Text } from '@react-three/drei'
+import { OrbitControls, MarchingCubes, MarchingCube, MeshTransmissionMaterial, Environment, Bounds, Text, Float } from '@react-three/drei'
 import { Physics, RigidBody, BallCollider } from '@react-three/rapier'
 
 function MetaBall({ color, vec = new THREE.Vector3(), ...props }) {
@@ -102,6 +102,7 @@ export default function Home() {
           <color attach="background" args={['#f0f0f0']} />
           <ambientLight intensity={1} />
           <Physics gravity={[0, 2, 0]}>
+            <Float>
             <MarchingCubes resolution={80} maxPolyCount={20000} enableUvs={false} enableColors>
               <meshStandardMaterial vertexColors thickness={0.15} roughness={0} />
               <MetaBall color="indianred" position={[1, 1, 0.5]} />
@@ -112,6 +113,7 @@ export default function Home() {
               <MetaBall color="aquamarine" position={[-3, -3, -0.5]} />
               <Pointer />
             </MarchingCubes>
+            </Float>
           </Physics>
           <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/industrial_workshop_foundry_1k.hdr" />
           {/* Zoom to fit a 1/1/1 box to match the marching cubes */}
