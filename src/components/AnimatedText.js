@@ -14,7 +14,7 @@ export default function AnimatedText() {
 
   return (
     <>
-      <div id="TitleText" className="word-fade absolute bottom-0 left-0 right-0 text-center text-4xl text-black z-2 mb-36 md:mb-36">
+      <div id="TitleText" className="word-fade absolute bottom-0 left-0 right-0 text-center text-4xl text-black z-2 mb-40">
         {words.map((word, i) => (
           <h1
             key={i}
