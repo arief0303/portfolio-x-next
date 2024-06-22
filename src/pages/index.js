@@ -97,7 +97,7 @@ function Pointer({ vec = new THREE.Vector3() }) {
 export default function Home() {
   return (
     <>
-      <div className='h-screen w-screen'>
+      <div className='h-screen w-screen relative'>
         <Canvas dpr={[1, 1.5]} camera={{ position: [0, 0, 5], fov: 25 }}>
           <color attach="background" args={['#f0f0f0']} />
           <ambientLight intensity={1} />
@@ -123,8 +123,9 @@ export default function Home() {
             </mesh>
           </Bounds>
         </Canvas>
+        <div className='gradient-overlay z-10' />
       </div>
-      <div className='h-screen w-screen bg-[#f0f0f0]' />
+      {/* <div className='h-screen w-screen bg-white' /> */}
     </>
   )
 }

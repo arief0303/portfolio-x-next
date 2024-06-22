@@ -31,3 +31,13 @@ body {
     text-wrap: balance;
   }
 }
+
+.gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(to top, white, rgba(255, 255, 255, 0) 20%);
+  pointer-events: none; /* Allows clicks to pass through */
+}
