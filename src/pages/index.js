@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { OrbitControls, MarchingCubes, MarchingCube, MeshTransmissionMaterial, Environment, Bounds, Text, Float } from '@react-three/drei'
 import { Physics, RigidBody, BallCollider } from '@react-three/rapier'
@@ -94,15 +94,14 @@ function Pointer({ vec = new THREE.Vector3() }) {
   );
 }
 
-export default function Home() {
+function Scene() {
   return (
     <>
-      <div className='h-screen w-screen relative'>
-        <Canvas dpr={[1, 1.5]} camera={{ position: [0, 0, 5], fov: 25 }}>
-          <color attach="background" args={['#f0f0f0']} />
-          <ambientLight intensity={1} />
-          <Physics gravity={[0, 2, 0]}>
-            <Float>
+      <Canvas dpr={[1, 1.5]} camera={{ position: [0, 0, 5], fov: 25 }}>
+        <color attach="background" args={['#f0f0f0']} />
+        <ambientLight intensity={1} />
+        <Physics gravity={[0, 2, 0]}>
+          <Float>
             <MarchingCubes resolution={80} maxPolyCount={20000} enableUvs={false} enableColors>
               <meshStandardMaterial vertexColors thickness={0.15} roughness={0} />
               <MetaBall color="indianred" position={[1, 1, 0.5]} />
@@ -113,19 +112,65 @@ export default function Home() {
               <MetaBall color="aquamarine" position={[-3, -3, -0.5]} />
               <Pointer />
             </MarchingCubes>
-            </Float>
-          </Physics>
-          <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/industrial_workshop_foundry_1k.hdr" />
-          {/* Zoom to fit a 1/1/1 box to match the marching cubes */}
-          <Bounds fit clip observe margin={1}>
-            <mesh visible={false}>
-              <boxGeometry />
-            </mesh>
-          </Bounds>
-        </Canvas>
-        <div className='gradient-overlay z-10' />
+          </Float>
+        </Physics>
+        <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/industrial_workshop_foundry_1k.hdr" />
+        {/* Zoom to fit a 1/1/1 box to match the marching cubes */}
+        <Bounds fit clip observe margin={1}>
+          <mesh visible={false}>
+            <boxGeometry />
+          </mesh>
+        </Bounds>
+      </Canvas>
+    </>
+  )
+}
+
+function WordFade({ words = ['Hello', 'Ciao', 'Bonjour', 'Salut', 'Hola', 'Nǐ hǎo', 'Hallo'], duration = 3000 }) {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex + 1) % words.length);
+    }, duration);
+    return () => clearInterval(interval);
+  }, [words, duration]);
+
+  return (
+    <div id="TitleText" className="word-fade absolute bottom-0 left-0 right-0 text-center text-4xl text-black z-2 mb-36">
+      {words.map((word, i) => (
+        <h1
+          key={i}
+          className={`word ${i === index ? 'fade-in' : 'fade-out'}`}
+          style={{
+            transition: `opacity 1.5s ease-in-out`,
+            opacity: i === index ? 1 : 0,
+          }}
+        >
+          {word} Arief.
+        </h1>
+      ))}
+    </div>
+  );
+}
+
+
+function AnimatedText() {
+  const words = ['Hello, I am ', "Hallo ik ben ", "Bonjour, je m'appelle ", 'Hola, mi es ', 'Nǐ hǎo, wǒ shì ', "Kon'nichiwa, watashi wa ", "Hallo ich bin "];
+  return <WordFade words={words} duration={2000} />;
+}
+
+export default function Home() {
+  let text = "[Placeholder]";
+  return (
+    <>
+      <div className='h-screen w-screen relative'>
+        <Scene />
+        {/* <h1 className='absolute bottom-0 left-0 right-0 text-center text-4xl text-black z-2 mb-36'>{text}</h1> */}
+        <AnimatedText />
+        <div className='gradient-overlay z-1' />
       </div>
-      {/* <div className='h-screen w-screen bg-white' /> */}
+      <div className='h-screen w-screen bg-white' />
     </>
   )
 }

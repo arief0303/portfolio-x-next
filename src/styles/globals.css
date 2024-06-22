@@ -38,6 +38,16 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(to top, white, rgba(255, 255, 255, 0) 20%);
+  background: linear-gradient(to top, white, rgba(255, 255, 255, 0) 50%);
   pointer-events: none; /* Allows clicks to pass through */
+}
+
+.word-fade {
+  height: 1.2em;
+}
+
+.word {
+  position: absolute;
+  width: 100%;
+  transition: opacity 0.5s ease-in-out; /* This might be redundant with inline styles */
 }
