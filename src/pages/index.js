@@ -30,7 +30,9 @@ function Pointer({ vec = new THREE.Vector3() }) {
   useFrame(({ pointer, viewport }) => {
     const { width, height } = viewport.getCurrentViewport()
     vec.set(pointer.x * (width / 2), pointer.y * (height / 2), 0)
-    ref.current.setNextKinematicTranslation(vec)
+    if (ref.current) {
+      ref.current.setNextKinematicTranslation(vec);
+    }
   })
   return (
     <RigidBody type="kinematicPosition" colliders={false} ref={ref}>
@@ -42,6 +44,7 @@ function Pointer({ vec = new THREE.Vector3() }) {
 
 export default function Home() {
   return (
+    <>
     <div className='h-screen w-screen'>
       <Canvas dpr={[1, 1.5]} camera={{ position: [0, 0, 5], fov: 25 }}>
         <color attach="background" args={['#f0f0f0']} />
@@ -67,5 +70,7 @@ export default function Home() {
         </Bounds>
       </Canvas>
     </div>
+    <div className='h-screen w-screen bg-white' />
+    </>
   )
 }
