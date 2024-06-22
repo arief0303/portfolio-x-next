@@ -51,3 +51,21 @@ body {
   width: 100%;
   transition: opacity 0.5s ease-in-out; /* This might be redundant with inline styles */
 }
+
+@media (hover: none) and (pointer: coarse) {
+  .touch\:md\:h-\[20vh\] {
+    height: 20vh; /* Show and set height for touch devices */
+  }
+  .touch\:w-screen {
+    width: 100vw; /* Apply full viewport width for touch devices */
+  }
+  .touch\:bg-white {
+    background-color: white; /* Apply background color for touch devices */
+  }
+  .touch\:text-black {
+    color: black; /* Apply text color for touch devices */
+  }
+  .hidden {
+    display: none; /* Ensure it's hidden by default */
+  }
+}

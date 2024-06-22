@@ -53,38 +53,42 @@ function Pointer({ vec = new THREE.Vector3() }) {
 
   useEffect(() => {
     const handleTouchMove = (event) => {
-      event.preventDefault();
-      const touch = event.touches[0];
-      const { width, height } = viewport.getCurrentViewport();
-      const marginWidth = width * 0.15;
-      const marginHeight = height * 0.15;
-      const effectiveWidth = width - 2 * marginWidth;
-      const effectiveHeight = height - 2 * marginHeight;
-
-      // Convert touch position to [-1, 1] range, considering margins
-      const x = ((touch.clientX / window.innerWidth) * 2 - 1) * (width / effectiveWidth);
-      const y = -((touch.clientY / window.innerHeight) * 2 - 1) * (height / effectiveHeight);
-
-      // Apply the same margin logic to touch input
-      if (
-        x >= -effectiveWidth / 2 &&
-        x <= effectiveWidth / 2 &&
-        y >= -effectiveHeight / 2 &&
-        y <= effectiveHeight / 2
-      ) {
-        vec.set(x * (width / 2), y * (height / 2), 0);
-        if (ref.current) {
-          ref.current.setNextKinematicTranslation(vec);
+      // Check if the touch event's target is the canvas
+      if (event.target.tagName === 'CANVAS') {
+        event.preventDefault(); // Prevent scrolling/zooming on canvas touch
+  
+        const touch = event.touches[0];
+        const { width, height } = viewport.getCurrentViewport();
+        const marginWidth = width * 0.15;
+        const marginHeight = height * 0.15;
+        const effectiveWidth = width - 2 * marginWidth;
+        const effectiveHeight = height - 2 * marginHeight;
+  
+        // Convert touch position to [-1, 1] range, considering margins
+        const x = ((touch.clientX / window.innerWidth) * 2 - 1) * (width / effectiveWidth);
+        const y = -((touch.clientY / window.innerHeight) * 2 - 1) * (height / effectiveHeight);
+  
+        // Apply the same margin logic to touch input
+        if (
+          x >= -effectiveWidth / 2 &&
+          x <= effectiveWidth / 2 &&
+          y >= -effectiveHeight / 2 &&
+          y <= effectiveHeight / 2
+        ) {
+          vec.set(x * (width / 2), y * (height / 2), 0);
+          if (ref.current) {
+            ref.current.setNextKinematicTranslation(vec);
+          }
         }
       }
     };
-
+  
     window.addEventListener('touchmove', handleTouchMove, { passive: false });
-
+  
     return () => {
       window.removeEventListener('touchmove', handleTouchMove);
     };
-  }, []); // Empty dependency array means this effect runs once on mount
+  }, []);
 
   return (
     <RigidBody type="kinematicPosition" colliders={false} ref={ref}>
@@ -161,12 +165,10 @@ function AnimatedText() {
 }
 
 export default function Home() {
-  let text = "[Placeholder]";
   return (
     <>
-      <div className='h-screen w-screen relative'>
+      <div id='r3f' className='h-screen w-screen relative'>
         <Scene />
-        {/* <h1 className='absolute bottom-0 left-0 right-0 text-center text-4xl text-black z-2 mb-36'>{text}</h1> */}
         <AnimatedText />
         <div className='gradient-overlay z-1' />
       </div>
