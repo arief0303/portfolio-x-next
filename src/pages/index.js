@@ -15,9 +15,6 @@ export default function Home() {
         <Scene />
         <div className='gradient-overlay z-1' />
         <AnimatedText />
-        <div className="flex justify-center items-center">
-          <img src={'/chevron-compact-up.svg'} alt='Chevron Up' className="mt-[-250px] z-10 w-16 h-16 fade-up" />
-        </div>
         {/* Transparent div for capturing touch events in the bottom 20% of the canvas */}
         <div
           className="absolute bottom-0 w-full h-1/5"
