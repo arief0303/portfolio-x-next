@@ -56,18 +56,18 @@ function Pointer({ vec = new THREE.Vector3() }) {
       // Check if the touch event's target is the canvas
       if (event.target.tagName === 'CANVAS') {
         event.preventDefault(); // Prevent scrolling/zooming on canvas touch
-  
+
         const touch = event.touches[0];
         const { width, height } = viewport.getCurrentViewport();
         const marginWidth = width * 0.15;
         const marginHeight = height * 0.15;
         const effectiveWidth = width - 2 * marginWidth;
         const effectiveHeight = height - 2 * marginHeight;
-  
+
         // Convert touch position to [-1, 1] range, considering margins
         const x = ((touch.clientX / window.innerWidth) * 2 - 1) * (width / effectiveWidth);
         const y = -((touch.clientY / window.innerHeight) * 2 - 1) * (height / effectiveHeight);
-  
+
         // Apply the same margin logic to touch input
         if (
           x >= -effectiveWidth / 2 &&
@@ -82,9 +82,9 @@ function Pointer({ vec = new THREE.Vector3() }) {
         }
       }
     };
-  
+
     window.addEventListener('touchmove', handleTouchMove, { passive: false });
-  
+
     return () => {
       window.removeEventListener('touchmove', handleTouchMove);
     };
@@ -141,7 +141,7 @@ function WordFade({ words, duration }) {
   }, [words, duration]);
 
   return (
-    <div id="TitleText" className="word-fade absolute bottom-0 left-0 right-0 text-center text-4xl text-black z-2 mb-36">
+    <div id="TitleText" className="word-fade absolute bottom-0 left-0 right-0 text-center text-4xl text-black z-2 mb-52">
       {words.map((word, i) => (
         <h1
           key={i}
@@ -169,8 +169,16 @@ export default function Home() {
     <>
       <div id='r3f' className='h-screen w-screen relative'>
         <Scene />
-        <AnimatedText />
         <div className='gradient-overlay z-1' />
+        <AnimatedText />
+        <div className="flex justify-center items-center">
+          <img src={'/chevron-compact-up.svg'} alt='Chevron Up' className="mt-[-250px] z-10 w-16 h-16 fade-up" />
+        </div>
+        {/* Transparent div for capturing touch events in the bottom 20% of the canvas */}
+        <div
+          className="absolute bottom-0 w-full h-1/5"
+          style={{ touchAction: 'pan-y' }}
+        ></div>
       </div>
       <div className='h-screen w-screen bg-white' />
     </>

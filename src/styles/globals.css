@@ -52,20 +52,17 @@ body {
   transition: opacity 0.5s ease-in-out; /* This might be redundant with inline styles */
 }
 
-@media (hover: none) and (pointer: coarse) {
-  .touch\:md\:h-\[20vh\] {
-    height: 20vh; /* Show and set height for touch devices */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  .touch\:w-screen {
-    width: 100vw; /* Apply full viewport width for touch devices */
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  .touch\:bg-white {
-    background-color: white; /* Apply background color for touch devices */
-  }
-  .touch\:text-black {
-    color: black; /* Apply text color for touch devices */
-  }
-  .hidden {
-    display: none; /* Ensure it's hidden by default */
-  }
+}
+
+.fade-up {
+  animation: fadeUp 2s ease-in-out infinite alternate;
 }
