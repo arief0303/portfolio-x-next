@@ -102,7 +102,7 @@ function Scene() {
         <ambientLight intensity={1} />
         <Physics gravity={[0, 2, 0]}>
           <Float>
-            <MarchingCubes resolution={80} maxPolyCount={20000} enableUvs={false} enableColors>
+            <MarchingCubes resolution={40} maxPolyCount={20000} enableUvs={false} enableColors>
               <meshStandardMaterial vertexColors thickness={0.15} roughness={0} />
               <MetaBall color="indianred" position={[1, 1, 0.5]} />
               <MetaBall color="skyblue" position={[-1, -1, -0.5]} />
@@ -126,7 +126,7 @@ function Scene() {
   )
 }
 
-function WordFade({ words = ['Hello', 'Ciao', 'Bonjour', 'Salut', 'Hola', 'Nǐ hǎo', 'Hallo'], duration = 3000 }) {
+function WordFade({ words, duration }) {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -156,7 +156,7 @@ function WordFade({ words = ['Hello', 'Ciao', 'Bonjour', 'Salut', 'Hola', 'Nǐ h
 
 
 function AnimatedText() {
-  const words = ['Hello, I am ', "Hallo ik ben ", "Bonjour, je m'appelle ", 'Hola, mi es ', 'Nǐ hǎo, wǒ shì ', "Kon'nichiwa, watashi wa ", "Hallo ich bin "];
+  const words = ['Hello, I am ', "Hallo, ik ben ", "Bonjour, je m'appelle ", 'Hola, mi es ', 'Nǐ hǎo, wǒ shì ', "Kon'nichiwa, watashi wa ", "Hallo ich bin ", "Halo, Nama saya "];
   return <WordFade words={words} duration={2000} />;
 }
 
