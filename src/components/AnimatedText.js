@@ -13,19 +13,24 @@ export default function AnimatedText() {
   }, [words, duration]);
 
   return (
-    <div id="TitleText" className="word-fade absolute bottom-0 left-0 right-0 text-center text-4xl text-black z-2 mb-52">
-      {words.map((word, i) => (
-        <h1
-          key={i}
-          className={`word ${i === index ? 'fade-in' : 'fade-out'}`}
-          style={{
-            transition: `opacity 1.5s ease-in-out`,
-            opacity: i === index ? 1 : 0,
-          }}
-        >
-          {word} Arief.
-        </h1>
-      ))}
-    </div>
+    <>
+      <div id="TitleText" className="word-fade absolute bottom-0 left-0 right-0 text-center text-4xl text-black z-2 mb-36 md:mb-36">
+        {words.map((word, i) => (
+          <h1
+            key={i}
+            className={`word ${i === index ? 'fade-in' : 'fade-out'}`}
+            style={{
+              transition: `opacity 1.5s ease-in-out`,
+              opacity: i === index ? 1 : 0,
+            }}
+          >
+            {word} Arief.
+          </h1>
+        ))}
+        <div className="flex justify-center items-center">
+          <img src={'/chevron-compact-up.svg'} alt='Chevron Up' className="z-10 w-16 h-16 fade-up mt-20" />
+        </div>
+      </div>
+    </>
   );
 }
