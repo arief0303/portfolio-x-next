@@ -160,7 +160,7 @@ function WordFade({ words, duration }) {
 
 
 function AnimatedText() {
-  const words = ['Hello, I am ', "Hallo, ik ben ", "Bonjour, je m'appelle ", 'Hola, mi es ', 'Nǐ hǎo, wǒ shì ', "Kon'nichiwa, watashi wa ", "Hallo ich bin ", "Halo, Nama saya "];
+  const words = ['Hello, I am ', "Hallo, ik ben ", "Bonjour, je m'appelle ", 'Hola, mi es ', 'Nǐ hǎo, wǒ shì ', "Kon'nichiwa, watashi wa ", "Hallo ich bin ", "Halo, nama saya "];
   return <WordFade words={words} duration={2000} />;
 }
 
