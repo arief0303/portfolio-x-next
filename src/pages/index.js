@@ -7,6 +7,7 @@ import MetaBall from '../components/MetaBall'
 import Pointer from '../components/Pointer'
 import Scene from '../components/Scene'
 import AnimatedText from '../components/AnimatedText'
+import Carousel from '../components/Carousel' 
 
 export default function Home() {
   return (
@@ -21,7 +22,9 @@ export default function Home() {
           style={{ touchAction: 'pan-y' }}
         ></div>
       </div>
-      <div className='h-screen w-screen bg-white' />
+      <div className='h-screen w-screen bg-white pt-0 md:pt-72'>
+        <Carousel />
+      </div>
     </>
   )
 }
