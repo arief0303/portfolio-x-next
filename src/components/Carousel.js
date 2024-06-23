@@ -96,11 +96,11 @@ export default function Carousel () {
           className='w-full h-1/2 rounded-2xl bg-center bg-cover duration-500'
         >
         </div>
-        <div className='absolute left-0 w-full px-4 md:px-32 py-10'>
+        <div className='w-screen h-auto px-4 md:px-32 pt-10'>
           <p className='text-black text-2xl font-bold'>
             {slides[currentIndex].description}
           </p>
-          <h4 className='text-black text-lg font-light h-full'>
+          <h4 className='text-black text-lg font-light h-auto'>
             {slides[currentIndex].details}
           </h4>
         </div>

@@ -7,7 +7,8 @@ import MetaBall from '../components/MetaBall'
 import Pointer from '../components/Pointer'
 import Scene from '../components/Scene'
 import AnimatedText from '../components/AnimatedText'
-import Carousel from '../components/Carousel' 
+import Carousel from '../components/Carousel'
+import Footer from '@/components/Footer'
 
 export default function Home() {
   return (
@@ -25,6 +26,9 @@ export default function Home() {
       <div className='h-screen w-screen bg-white md:pt-64 pt-52'>
         <Carousel />
       </div>
+      {/* <div className='h-full w-screen bottom-0 mt-60'>
+      <Footer />
+      </div> */}
     </>
   )
 }

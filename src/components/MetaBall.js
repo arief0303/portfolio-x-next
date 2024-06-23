@@ -1,8 +1,8 @@
 import * as THREE from 'three'
-import React, { useRef, useEffect, useState } from 'react'
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { OrbitControls, MarchingCubes, MarchingCube, MeshTransmissionMaterial, Environment, Bounds, Text, Float } from '@react-three/drei'
-import { Physics, RigidBody, BallCollider } from '@react-three/rapier'
+import React, { useRef } from 'react'
+import { useFrame } from '@react-three/fiber'
+import { MarchingCube } from '@react-three/drei'
+import { RigidBody, BallCollider } from '@react-three/rapier'
 
 export default function MetaBall({ color, vec = new THREE.Vector3(), ...props }) {
   const api = useRef()
