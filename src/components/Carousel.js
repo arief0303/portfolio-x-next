@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs'
 
-export default function Carousel () {
+export default function Carousel() {
   const slides = [
     {
       url: '/images/screenshot1.png',
@@ -96,6 +96,18 @@ export default function Carousel () {
           className='w-full h-1/2 rounded-2xl bg-center bg-cover duration-500'
         >
         </div>
+        <div className='flex justify-center mt-4'>
+  {/* Left Arrow */}
+  <div className='text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+    <BsChevronCompactLeft onClick={prevSlideBtnClick} size={30} />
+  </div>
+  {/* Spacer for visual balance, adjust as needed */}
+  <div className='mx-2'></div>
+  {/* Right Arrow */}
+  <div className='text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+    <BsChevronCompactRight onClick={nextSlideBtnClick} size={30} />
+  </div>
+</div>
         <div className='w-screen h-auto px-4 md:px-32 pt-10'>
           <p className='text-black text-2xl font-bold'>
             {slides[currentIndex].description}
@@ -103,16 +115,6 @@ export default function Carousel () {
           <h4 className='text-black text-lg font-light h-auto'>
             {slides[currentIndex].details}
           </h4>
-        </div>
-        {/* Left Arrow */}
-        {/* <div className='hidden group-hover:block absolute top-[36%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'> */}
-        <div className='absolute top-[36%] -translate-x-0 translate-y-[-200%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer ml-0 md:ml-60'>
-          <BsChevronCompactLeft onClick={prevSlideBtnClick} size={30} />
-        </div>
-        {/* Right Arrow */}
-        {/* <div className='hidden group-hover:block absolute top-[36%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'> */}
-        <div className='absolute top-[36%] -translate-x-0 translate-y-[-200%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer mr-0 md:mr-60'>
-          <BsChevronCompactRight onClick={nextSlideBtnClick} size={30} />
         </div>
       </div>
     </>
