@@ -42,7 +42,7 @@ export default function Carousel() {
 
   const prevSlideBtnClick = () => {
     setShouldContinue(false);
-    setTimeout(() => setShouldContinue(true), 10000);
+    setTimeout(() => setShouldContinue(true), 15000);
     const isFirstSlide = currentIndex === 0;
     const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
@@ -56,7 +56,7 @@ export default function Carousel() {
 
   const nextSlideBtnClick = () => {
     setShouldContinue(false);
-    setTimeout(() => setShouldContinue(true), 10000);
+    setTimeout(() => setShouldContinue(true), 15000);
     const isLastSlide = currentIndex === slides.length - 1;
     const newIndex = isLastSlide ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
