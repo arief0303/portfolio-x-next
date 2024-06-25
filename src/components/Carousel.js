@@ -4,25 +4,25 @@ import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs'
 export default function Carousel() {
   const slides = [
     {
-      url: '/images/screenshot1.png',
+      url: '/images/bitaverse-demo.gif',
       description: 'Bitaverse',
       details: 'A metaverse featuring multiplayer made with Babylon.js & Colyseus using React as the framework. I developed metaverses featuring multiplayer using Babylon.js and Colyseus. I used Babylon.js to create and render the 3D models, materials, lights, cameras, and scenes for the metaverses. I used Colyseus to create and manage the game rooms, state synchronization, networking, and interactivity for the multiplayer features.',
     },
     {
-      url: '/images/image1.png',
+      url: '/images/aspace-demo.gif',
       description: 'Aspace',
-      details: 'A metaverse variant built on same technologies as Bitaverse for the client Sampoerna. Featuring additional components such as location based audio system, LOD performance optimization, and player area based(portal) teleportation.',
+      details: 'A prototype metaverse variant built on same technologies as Bitaverse for the client Sampoerna. Featuring additional components such as location based audio system, LOD performance optimization, and player area based(portal) teleportation.',
     },
     {
-      url: '/images/image3.png',
+      url: '/images/demo21.gif',
       description: '3D Van interior configurator',
       details: 'I developed an online 3D product customizer using Three.js, a JavaScript library for 3D graphics. The web app lets users customize and preview vehicle interiors for a particular model of a van.',
     },
-    {
+    /* {
       url: '/images/Screenshot4.png',
       description: 'Closepay',
       details: 'I developed web applications for a fintech startup using various frameworks, mainly React and Next.js. The company focuses on payment systems especially in the educational industry.',
-    },
+    }, */
     /* {
       url: 'https://images.unsplash.com/photo-1512756290469-ec264b7fbf87?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2253&q=80',
     },
@@ -42,7 +42,7 @@ export default function Carousel() {
 
   const prevSlideBtnClick = () => {
     setShouldContinue(false);
-    setTimeout(() => setShouldContinue(true), 15000);
+    setTimeout(() => setShouldContinue(true), 20000);
     const isFirstSlide = currentIndex === 0;
     const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
@@ -56,7 +56,7 @@ export default function Carousel() {
 
   const nextSlideBtnClick = () => {
     setShouldContinue(false);
-    setTimeout(() => setShouldContinue(true), 15000);
+    setTimeout(() => setShouldContinue(true), 20000);
     const isLastSlide = currentIndex === slides.length - 1;
     const newIndex = isLastSlide ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
@@ -77,7 +77,7 @@ export default function Carousel() {
       if (shouldContinue) {
         nextSlide();
       }
-    }, 5000);
+    }, 20000);
     return () => clearInterval(interval);
   }, [currentIndex, shouldContinue]);
 
