@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo, useCallback } from 'react'
 import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -8,7 +8,8 @@ export default function Carousel() {
   const [shouldContinue, setShouldContinue] = useState(true);
   const [animate, setAnimate] = useState(false);
 
-  const slides = [
+  // useMemo to memoize the slides array
+  const slides = useMemo(() => [
     {
       url: '/images/bitaverse-demo.gif',
       title: 'Bitaverse',
@@ -25,17 +26,17 @@ export default function Carousel() {
       details: 'I developed an online 3D product customizer using Three.js, a JavaScript library for 3D graphics. The web app lets users customize and preview vehicle interiors for a particular model of a van.',
     },
     /* {
-      url: '/images/Screenshot4.png',
-      title: 'Closepay',
-      details: 'I developed web applications for a fintech startup using various frameworks, mainly React and Next.js. The company focuses on payment systems especially in the educational industry.',
-    }, */
+    url: '/images/Screenshot4.png',
+    title: 'Closepay',
+    details: 'I developed web applications for a fintech startup using various frameworks, mainly React and Next.js. The company focuses on payment systems especially in the educational industry.',
+  }, */
     /* {
       url: 'https://images.unsplash.com/photo-1512756290469-ec264b7fbf87?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2253&q=80',
     },
     {
       url: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2671&q=80',
     }, */
-  ];
+  ], []);
 
   const prevSlide = () => {
     const isFirstSlide = currentIndex === 0;
@@ -51,19 +52,28 @@ export default function Carousel() {
     setCurrentIndex(newIndex);
   };
 
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     const isLastSlide = currentIndex === slides.length - 1;
     const newIndex = isLastSlide ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
-  };
+  }, []);
 
-  const nextSlideBtnClick = () => {
-    setShouldContinue(false);
-    setTimeout(() => setShouldContinue(true), 20000);
-    const isLastSlide = currentIndex === slides.length - 1;
-    const newIndex = isLastSlide ? 0 : currentIndex + 1;
-    setCurrentIndex(newIndex);
-  };
+  // useEffect hooks that use slides and nextSlide
+  // For example, preloading images
+  useEffect(() => {
+    slides.forEach(slide => {
+      const img = new Image();
+      img.src = slide.url;
+    });
+  }, [slides]);
+
+const nextSlideBtnClick = useCallback(() => {
+  setShouldContinue(false);
+  setTimeout(() => setShouldContinue(true), 20000);
+  const isLastSlide = currentIndex === slides.length - 1;
+  const newIndex = isLastSlide ? 0 : currentIndex + 1;
+  setCurrentIndex(newIndex);
+}, [currentIndex, slides.length, setShouldContinue]);
 
   const goToSlide = ({ slideIndex }) => {
     setCurrentIndex(slideIndex);
@@ -71,18 +81,23 @@ export default function Carousel() {
 
   //for every second change the slide
   useEffect(() => {
-    //preload all images first
+    // Preload images only when slides change
     slides.forEach((slide) => {
-      new Image().src = slide.url;
+      const img = new Image();
+      img.src = slide.url;
     });
+  }, [slides]);
 
+  useEffect(() => {
     const interval = setInterval(() => {
       if (shouldContinue) {
         nextSlide();
       }
     }, 10000);
+
+    // Cleanup to prevent memory leaks
     return () => clearInterval(interval);
-  }, [currentIndex, shouldContinue]);
+  }, [shouldContinue, nextSlide]);
 
   useEffect(() => {
     AOS.init();
@@ -98,7 +113,7 @@ export default function Carousel() {
   return (
     <>
       <div className="flex justify-center items-center">
-      <p className='text-black font-bold text-5xl p-20' data-aos="zoom-in-up">Projects</p>
+        <p className='text-black font-bold text-5xl p-20' data-aos="zoom-in-up">Projects</p>
       </div>
       <div className='h-full w-full m-auto py-0 relative group bg-inherit'>
         <div

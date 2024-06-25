@@ -31,7 +31,7 @@ export default function Home() {
       <div className='h-screen w-screen bg-white mt-52'>
         <Carousel />
       </div>
-      <div className='h-[10vh] w-screen bg-white'></div>
+      <div className='h-[5vh] w-screen bg-white'></div>
       {/* <div className='h-full w-screen bottom-0 mt-60'>
       <Footer />
       </div> */}

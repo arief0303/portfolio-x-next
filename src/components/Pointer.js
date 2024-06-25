@@ -67,7 +67,7 @@ export default function Pointer({ vec = new THREE.Vector3() }) {
       return () => {
         window.removeEventListener('touchmove', handleTouchMove);
       };
-    }, []);
+    }, [vec, viewport]);
   
     return (
       <RigidBody type="kinematicPosition" colliders={false} ref={ref}>

@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
+import Image from 'next/image';
 
 export default function AnimatedText() {
-  const words = ['Hello, I am ', "Hallo, ik ben ", "Bonjour, je m'appelle ", 'Hola, mi es ', 'Nǐ hǎo, wǒ shì ', "Kon'nichiwa, watashi wa ", "Hallo ich bin ", "Halo, nama saya "];
+  const words = useMemo(() => ['Hello, I am ', "Hallo, ik ben ", "Bonjour, je m'appelle ", 'Hola, mi es ', 'Nǐ hǎo, wǒ shì ', "Kon'nichiwa, watashi wa ", "Hallo ich bin ", "Halo, nama saya "], []);
   const duration = 2000;
   const [index, setIndex] = useState(0);
 
@@ -28,7 +29,7 @@ export default function AnimatedText() {
           </h1>
         ))}
         <div className="flex justify-center items-center">
-          <img src={'/chevron-compact-up.svg'} alt='Chevron Up' className="z-10 w-16 h-16 fade-up mt-20" />
+        <Image src="/chevron-compact-up.svg" alt="chevron" width={500} height={300} className="z-10 w-16 h-16 fade-up mt-20"/>
         </div>
       </div>
     </>
