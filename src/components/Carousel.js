@@ -1,26 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs'
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 export default function Carousel() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [shouldContinue, setShouldContinue] = useState(true);
+  const [animate, setAnimate] = useState(false);
+
   const slides = [
     {
       url: '/images/bitaverse-demo.gif',
-      description: 'Bitaverse',
+      title: 'Bitaverse',
       details: 'A metaverse featuring multiplayer made with Babylon.js & Colyseus using React as the framework. I developed metaverses featuring multiplayer using Babylon.js and Colyseus. I used Babylon.js to create and render the 3D models, materials, lights, cameras, and scenes for the metaverses. I used Colyseus to create and manage the game rooms, state synchronization, networking, and interactivity for the multiplayer features.',
     },
     {
       url: '/images/aspace-demo.gif',
-      description: 'Aspace',
+      title: 'Aspace',
       details: 'A prototype metaverse variant built on same technologies as Bitaverse for the client Sampoerna. Featuring additional components such as minimap for player navigation, location based audio system, LOD performance optimization, and player area based teleportation.',
     },
     {
       url: '/images/demo21.gif',
-      description: '3D Van interior configurator',
+      title: '3D Van interior configurator',
       details: 'I developed an online 3D product customizer using Three.js, a JavaScript library for 3D graphics. The web app lets users customize and preview vehicle interiors for a particular model of a van.',
     },
     /* {
       url: '/images/Screenshot4.png',
-      description: 'Closepay',
+      title: 'Closepay',
       details: 'I developed web applications for a fintech startup using various frameworks, mainly React and Next.js. The company focuses on payment systems especially in the educational industry.',
     }, */
     /* {
@@ -30,9 +36,6 @@ export default function Carousel() {
       url: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2671&q=80',
     }, */
   ];
-
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [shouldContinue, setShouldContinue] = useState(true);
 
   const prevSlide = () => {
     const isFirstSlide = currentIndex === 0;
@@ -77,14 +80,25 @@ export default function Carousel() {
       if (shouldContinue) {
         nextSlide();
       }
-    }, 20000);
+    }, 10000);
     return () => clearInterval(interval);
   }, [currentIndex, shouldContinue]);
+
+  useEffect(() => {
+    AOS.init();
+  }, []);
+
+  useEffect(() => {
+    // Trigger the animation every time currentIndex changes
+    setAnimate(false); // Reset animation
+    const timer = setTimeout(() => setAnimate(true), 50); // Brief delay to reset the animation state
+    return () => clearTimeout(timer);
+  }, [currentIndex]);
 
   return (
     <>
       <div className="flex justify-center items-center">
-        <p className='text-black font-bold text-5xl p-20'>Projects</p>
+      <p className='text-black font-bold text-5xl p-20' data-aos="zoom-in-up">Projects</p>
       </div>
       <div className='h-full w-full m-auto py-0 relative group bg-inherit'>
         <div
@@ -109,10 +123,10 @@ export default function Carousel() {
           </div>
         </div>
         <div className='w-screen h-auto px-4 md:px-32 pt-10'>
-          <p className='text-black text-2xl font-bold'>
-            {slides[currentIndex].description}
+          <p className={`text-black text-2xl font-bold ${animate ? 'fade-in-title' : ''}`}>
+            {slides[currentIndex].title}
           </p>
-          <h4 className='text-black text-lg font-light h-auto'>
+          <h4 className={`text-black text-lg font-light h-auto ${animate ? 'fade-in-details' : ''}`}>
             {slides[currentIndex].details}
           </h4>
         </div>

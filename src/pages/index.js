@@ -28,7 +28,7 @@ export default function Home() {
           style={{ touchAction: 'pan-y' }}
         ></div>
       </div>
-      <div className='h-screen w-screen bg-white pt-52'>
+      <div className='h-screen w-screen bg-white mt-52'>
         <Carousel />
       </div>
       <div className='h-[10vh] w-screen bg-white'></div>

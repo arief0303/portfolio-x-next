@@ -58,6 +58,38 @@ body {
   }
 }
 
-.fade-up {
-  animation: fadeUp 2s ease-in-out infinite alternate;
+@keyframes fadeInTitle {
+  from {
+    opacity: 0;
+    transform: translateX(10%); /* Start from the right */
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0); /* End at its original position */
+  }
+}
+
+@keyframes fadeInDetails {
+  from {
+    opacity: 0;
+    /* transform: translateY(20px); */
+  }
+  to {
+    opacity: 1;
+    /* transform: translateY(0); */
+  }
+}
+
+.fade-in-title, .fade-in-details {
+  opacity: 0; /* Ensure elements are initially hidden */
+  transform: translateY(20px); /* Start from 20px below their final position */
+}
+
+.fade-in-title {
+  animation: fadeInTitle 2s ease forwards;
+}
+
+.fade-in-details {
+  animation: fadeInDetails 2s ease forwards;
+  animation-delay: 0.5s; /* Delay for the details animation */
 }
