@@ -61,7 +61,7 @@ body {
 @keyframes fadeInTitle {
   from {
     opacity: 0;
-    transform: translateX(10%); /* Start from the right */
+    transform: translateY(100%); /* Start from the right */
   }
   to {
     opacity: 1;
@@ -82,7 +82,7 @@ body {
 
 .fade-in-title, .fade-in-details {
   opacity: 0; /* Ensure elements are initially hidden */
-  transform: translateY(20px); /* Start from 20px below their final position */
+  transform: translateY(5px); /* Start from 20px below their final position */
 }
 
 .fade-in-title {
