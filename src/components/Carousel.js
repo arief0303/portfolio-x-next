@@ -11,7 +11,7 @@ export default function Carousel() {
     {
       url: '/images/aspace-demo.gif',
       description: 'Aspace',
-      details: 'A prototype metaverse variant built on same technologies as Bitaverse for the client Sampoerna. Featuring additional components such as minimap for player navigation, location based audio system, LOD performance optimization, and player area based(portal) teleportation.',
+      details: 'A prototype metaverse variant built on same technologies as Bitaverse for the client Sampoerna. Featuring additional components such as minimap for player navigation, location based audio system, LOD performance optimization, and player area based teleportation.',
     },
     {
       url: '/images/demo21.gif',
