@@ -19,6 +19,7 @@
 body {
   color: rgb(var(--foreground-rgb));
   background-color: white;
+  overflow-x: hidden;
 }
 
 @layer utilities {
@@ -56,6 +57,10 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.fade-up {
+  animation: fadeUp 2s ease-in-out infinite alternate;
 }
 
 @keyframes fadeInTitle {
