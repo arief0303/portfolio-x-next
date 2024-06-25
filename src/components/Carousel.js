@@ -86,7 +86,7 @@ export default function Carousel() {
       <div className="flex justify-center items-center">
         <p className='text-black font-bold text-5xl p-20'>Projects</p>
       </div>
-      <div className='h-full w-full m-auto py-0 px-4 relative group bg-inherit'>
+      <div className='h-full w-full m-auto py-0 relative group bg-inherit'>
         <div
           style={{
             backgroundImage: `url(${slides[currentIndex].url})`, backgroundSize: 'contain',
@@ -97,17 +97,17 @@ export default function Carousel() {
         >
         </div>
         <div className='flex justify-center mt-4'>
-  {/* Left Arrow */}
-  <div className='text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
-    <BsChevronCompactLeft onClick={prevSlideBtnClick} size={30} />
-  </div>
-  {/* Spacer for visual balance, adjust as needed */}
-  <div className='mx-2'></div>
-  {/* Right Arrow */}
-  <div className='text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
-    <BsChevronCompactRight onClick={nextSlideBtnClick} size={30} />
-  </div>
-</div>
+          {/* Left Arrow */}
+          <div className='text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+            <BsChevronCompactLeft onClick={prevSlideBtnClick} size={30} />
+          </div>
+          {/* Spacer for visual balance, adjust as needed */}
+          <div className='mx-2'></div>
+          {/* Right Arrow */}
+          <div className='text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+            <BsChevronCompactRight onClick={nextSlideBtnClick} size={30} />
+          </div>
+        </div>
         <div className='w-screen h-auto px-4 md:px-32 pt-10'>
           <p className='text-black text-2xl font-bold'>
             {slides[currentIndex].description}
