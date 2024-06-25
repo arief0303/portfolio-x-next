@@ -9,10 +9,15 @@ import Scene from '../components/Scene'
 import AnimatedText from '../components/AnimatedText'
 import Carousel from '../components/Carousel'
 import Footer from '@/components/Footer'
+import Head from 'next/head';
 
 export default function Home() {
   return (
     <>
+      <Head>
+        <title>Portfolio</title>
+        <link rel="icon" href="./favicon.ico" />
+      </Head>
       <div id='r3f' className='h-screen w-screen relative'>
         <Scene />
         <div className='gradient-overlay z-1' />
@@ -26,6 +31,7 @@ export default function Home() {
       <div className='h-screen w-screen bg-white pt-52'>
         <Carousel />
       </div>
+      <div className='h-[10vh] w-screen bg-white'></div>
       {/* <div className='h-full w-screen bottom-0 mt-60'>
       <Footer />
       </div> */}
