@@ -43,6 +43,7 @@ function Loader() {
       <div style={{ width: '100%', backgroundColor: '#eee', borderRadius: '2px', margin: '20px 0' }}>
         <div style={{
           position: 'fixed',
+          zIndex: 100,
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
