@@ -1,14 +1,73 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Canvas } from '@react-three/fiber'
-import { MarchingCubes, Environment, Bounds, Float } from '@react-three/drei'
+import { MarchingCubes, Environment, Bounds, Float, useProgress, Html } from '@react-three/drei'
 import { Physics } from '@react-three/rapier'
 import MetaBall from './MetaBall'
 import Pointer from './Pointer'
+
+function useProgressMock() {
+  const [progress, setProgress] = useState(0); // Initial progress
+  const [loaded, setLoaded] = useState(0); // Initial loaded items
+  const total = 100; // Total items to load, for simplicity assuming 100%
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProgress((prevProgress) => {
+        const nextProgress = prevProgress + 1; // Increment progress
+        if (nextProgress >= 100) {
+          clearInterval(interval); // Stop the interval when 100% is reached
+          return 100;
+        }
+        return nextProgress;
+      });
+      setLoaded((prevLoaded) => {
+        const nextLoaded = prevLoaded + 1; // Increment loaded items
+        return nextLoaded > total ? total : nextLoaded;
+      });
+    }, 100); // Update progress every 1 second
+
+    return () => clearInterval(interval); // Cleanup interval on component unmount
+  }, []);
+
+  // Mock returning the same structure as the real useProgress
+  return { active: true, progress, errors: [], item: '', loaded, total };
+}
+
+function Loader() {
+  const { active, progress } = useProgress();
+
+  if (!active) return null;
+
+  return (
+    <Html>
+      <div style={{ width: '100%', backgroundColor: '#eee', borderRadius: '2px', margin: '20px 0' }}>
+        <div style={{
+          position: 'fixed',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          height: '20px',
+          width: '17vw',
+          background: `linear-gradient(to right, #ffffff ${progress}%, #d9d9d9 ${progress}%)`,
+          borderRadius: '2px',
+          transition: 'background 0.5s ease-in-out, opacity 0.5s ease-in-out',
+          textAlign: 'center',
+          color: 'black',
+          lineHeight: '20px',
+          opacity: progress === 100 ? 0 : 1,
+        }}>
+          {Math.round(progress)}%
+        </div>
+      </div>
+    </Html>
+  );
+}
 
 export default function Scene() {
   return (
     <>
       <Canvas dpr={[1, 1.5]} camera={{ position: [0, 0, 5], fov: 25 }}>
+        <Loader />
         <color attach="background" args={['#f0f0f0']} />
         <ambientLight intensity={1} />
         <Physics gravity={[0, 2, 0]}>
