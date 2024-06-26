@@ -7,6 +7,7 @@ export default function Carousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [shouldContinue, setShouldContinue] = useState(true);
   const [animate, setAnimate] = useState(false);
+  const [intervalDuration, setIntervalDuration] = useState(10000); // Update to 3 seconds
 
   // useMemo to memoize the slides array
   const slides = useMemo(() => [
@@ -37,28 +38,25 @@ export default function Carousel() {
       url: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2671&q=80',
     }, */
   ], []);
-
-  const prevSlide = () => {
-    const isFirstSlide = currentIndex === 0;
-    const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
-    setCurrentIndex(newIndex);
-  };
+  const isLastSlide = currentIndex === slides.length - 1;
 
   const prevSlideBtnClick = () => {
     setShouldContinue(false);
-    setTimeout(() => setShouldContinue(true), 5000);
+    setTimeout(() => setShouldContinue(true), 15000);
     const isFirstSlide = currentIndex === 0;
     const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
   };
 
-  const nextSlide = useCallback(() => {
+  const nextSlideBtnClick = useCallback(() => {
+    setShouldContinue(false);
+    setTimeout(() => setShouldContinue(true), 15000);
     const isLastSlide = currentIndex === slides.length - 1;
     const newIndex = isLastSlide ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
-  }, []);
+  }, [currentIndex, slides.length, setShouldContinue]);
 
-  // useEffect hooks that use slides and nextSlide
+  // useEffect hooks that use slides and  nextSlide
   // For example, preloading images
   useEffect(() => {
     slides.forEach(slide => {
@@ -67,13 +65,6 @@ export default function Carousel() {
     });
   }, [slides]);
 
-const nextSlideBtnClick = useCallback(() => {
-  setShouldContinue(false);
-  setTimeout(() => setShouldContinue(true), 5000);
-  const isLastSlide = currentIndex === slides.length - 1;
-  const newIndex = isLastSlide ? 0 : currentIndex + 1;
-  setCurrentIndex(newIndex);
-}, [currentIndex, slides.length, setShouldContinue]);
 
   const goToSlide = ({ slideIndex }) => {
     setCurrentIndex(slideIndex);
@@ -89,15 +80,14 @@ const nextSlideBtnClick = useCallback(() => {
   }, [slides]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (shouldContinue) {
-        nextSlide();
-      }
-    }, 10000);
+    if (shouldContinue) {
+      const interval = setInterval(() => {
+        setCurrentIndex(currentIndex => isLastSlide ? 0 : currentIndex + 1);
+      }, intervalDuration);
 
-    // Cleanup to prevent memory leaks
-    return () => clearInterval(interval);
-  }, [shouldContinue, nextSlide]);
+      return () => clearInterval(interval);
+    }
+  }, [currentIndex, shouldContinue, intervalDuration, isLastSlide]);
 
   useEffect(() => {
     AOS.init();
