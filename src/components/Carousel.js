@@ -13,7 +13,7 @@ export default function Carousel() {
   const slides = useMemo(() => [
     {
       url: '/images/demo21.gif',
-      title: '3D Van interior configurator',
+      title: '3D Van Interior Configurator',
       details: 'I developed an online 3D product customizer using Three.js, a JavaScript library for 3D graphics. The web app lets users customize and preview vehicle interiors for a particular model of a van for the client.',
     },
     {
