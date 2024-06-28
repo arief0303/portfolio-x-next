@@ -19,7 +19,7 @@ export default function Carousel() {
     {
       url: '/images/customizer-demo.gif',
       title: 'Shoe Configurator Demo',
-      details: "A demo of a shoe customizer using React Three Fiber (a Three.js library wrapper for React). The web app lets users customize a shoe color material by simply clicking each part of the shoe and modify its material. Check it out here.",
+      details: "A demo of a shoe customizer using React Three Fiber (a Three.js library wrapper for React & Next.js) this particular site is build on top of Next.js framework. The web app lets users customize a shoe color material by simply clicking each part of the shoe and modify its material. Check it out here.",
       link: "https://konfigurator-one.vercel.app/",
     },
     {
