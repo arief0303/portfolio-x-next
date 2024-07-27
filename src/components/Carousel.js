@@ -8,6 +8,7 @@ export default function Carousel() {
   const [shouldContinue, setShouldContinue] = useState(true);
   const [animate, setAnimate] = useState(false);
   const [intervalDuration, setIntervalDuration] = useState(10000); // Update to 3 seconds
+  const [isImageLoading, setIsImageLoading] = useState(true);
 
   // useMemo to memoize the slides array
   const slides = useMemo(() => [
@@ -121,20 +122,18 @@ export default function Carousel() {
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat'
           }}
-          className='w-full h-1/2 rounded-2xl bg-center bg-cover duration-500'
+          className='w-full h-1/4 sm:h-1/2 rounded-2xl bg-center bg-cover duration-500'
         >
         </div>
-        <div className='flex justify-center mt-4'>
-          {/* Left Arrow */}
-          <div className='text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
-            <BsChevronCompactLeft onClick={prevSlideBtnClick} size={30} />
-          </div>
-          {/* Spacer for visual balance, adjust as needed */}
-          <div className='mx-2'></div>
-          {/* Right Arrow */}
-          <div className='text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
-            <BsChevronCompactRight onClick={nextSlideBtnClick} size={30} />
-          </div>
+        {/* Bullet Indicators */}
+        <div className="bullet-container">
+          {slides.map((_, index) => (
+            <span
+              key={index}
+              className={`bullet ${index === currentIndex ? 'active' : ''}`}
+              onClick={() => setCurrentIndex(index)}
+            ></span>
+          ))}
         </div>
         <div className="w-screen h-auto px-4 md:px-32 pt-10">
           {slides[currentIndex].title && (
