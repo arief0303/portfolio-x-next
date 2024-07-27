@@ -7,7 +7,7 @@ export default function Carousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [shouldContinue, setShouldContinue] = useState(true);
   const [animate, setAnimate] = useState(false);
-  const [intervalDuration, setIntervalDuration] = useState(10000); // Update to 3 seconds
+  const [intervalDuration, setIntervalDuration] = useState(10000);
   const [isImageLoading, setIsImageLoading] = useState(true);
 
   // useMemo to memoize the slides array
@@ -103,12 +103,12 @@ export default function Carousel() {
     AOS.init();
   }, []);
 
-  useEffect(() => {
-    // Trigger the animation every time currentIndex changes
-    setAnimate(false); // Reset animation
-    const timer = setTimeout(() => setAnimate(true), 50); // Brief delay to reset the animation state
-    return () => clearTimeout(timer);
-  }, [currentIndex]);
+   useEffect(() => {
+     // Trigger the animation every time currentIndex changes
+     setAnimate(false); // Reset animation
+     const timer = setTimeout(() => setAnimate(true), 50); // Brief delay to reset the animation state
+     return () => clearTimeout(timer);
+   }, [currentIndex]);
 
   return (
     <>
@@ -127,7 +127,13 @@ export default function Carousel() {
             <span
               key={index}
               className={`bullet ${index === currentIndex ? 'active' : ''}`}
-              onClick={() => setCurrentIndex(index)}
+              onClick={() => {
+                setCurrentIndex(index);
+                setShouldContinue(false);
+                setTimeout(() => {
+                  setShouldContinue(true);
+                }, 3000); // 3000ms delay (3 seconds)
+              }}
             ></span>
           ))}
         </div>
