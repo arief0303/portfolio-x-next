@@ -103,12 +103,12 @@ export default function Carousel() {
     AOS.init();
   }, []);
 
-   useEffect(() => {
-     // Trigger the animation every time currentIndex changes
-     setAnimate(false); // Reset animation
-     const timer = setTimeout(() => setAnimate(true), 50); // Brief delay to reset the animation state
-     return () => clearTimeout(timer);
-   }, [currentIndex]);
+  useEffect(() => {
+    // Trigger the animation every time currentIndex changes
+    setAnimate(false); // Reset animation
+    const timer = setTimeout(() => setAnimate(true), 50); // Brief delay to reset the animation state
+    return () => clearTimeout(timer);
+  }, [currentIndex]);
 
   return (
     <>
@@ -116,10 +116,10 @@ export default function Carousel() {
         <p className='text-black font-bold text-5xl p-8' data-aos="zoom-in-up">Projects</p>
       </div>
       <div className='h-full w-full m-auto py-0 relative group bg-inherit'>
-        <img
+      <img
           src={slides[currentIndex].url}
           alt={`Slide ${currentIndex}`}
-          className='h-1/4 sm:h-1/2 w-auto rounded-xl duration-500 overflow-hidden object-contain mx-auto'
+          className={`h-1/4 sm:h-1/2 w-auto rounded-xl duration-500 overflow-hidden object-contain mx-auto ${animate ? 'fade-in' : ''}`}
         />
         {/* Bullet Indicators */}
         <div className="bullet-container">
