@@ -113,18 +113,14 @@ export default function Carousel() {
   return (
     <>
       <div className="flex justify-center items-center">
-        <p className='text-black font-bold text-5xl p-20' data-aos="zoom-in-up">Projects</p>
+        <p className='text-black font-bold text-5xl p-8' data-aos="zoom-in-up">Projects</p>
       </div>
       <div className='h-full w-full m-auto py-0 relative group bg-inherit'>
-        <div
-          style={{
-            backgroundImage: `url(${slides[currentIndex].url})`, backgroundSize: 'contain',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat'
-          }}
-          className='w-full h-1/4 sm:h-1/2 rounded-2xl bg-center bg-cover duration-500'
-        >
-        </div>
+        <img
+          src={slides[currentIndex].url}
+          alt={`Slide ${currentIndex}`}
+          className='h-1/4 sm:h-1/2 w-auto rounded-xl duration-500 overflow-hidden object-contain mx-auto'
+        />
         {/* Bullet Indicators */}
         <div className="bullet-container">
           {slides.map((_, index) => (
