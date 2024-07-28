@@ -10,6 +10,7 @@ import AnimatedText from '../components/AnimatedText'
 import Carousel from '../components/Carousel'
 import Footer from '@/components/Footer'
 import Head from 'next/head';
+import Loader from '@/components/Loader';
 
 export default function Home() {
   return (
@@ -19,7 +20,10 @@ export default function Home() {
         <link rel="icon" href="./favicon.ico" />
       </Head>
       <div id='r3f' className='h-screen w-screen relative'>
-        <Scene />
+        <Loader />
+        <Canvas dpr={[1, 1.5]} camera={{ position: [0, 0, 5], fov: 25 }}>
+          <Scene />
+        </Canvas>
         <div className='gradient-overlay z-1' />
         <AnimatedText />
         {/* Transparent div for capturing touch events in the bottom 20% of the canvas */}
