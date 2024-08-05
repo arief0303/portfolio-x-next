@@ -174,7 +174,7 @@ export default function Carousel() {
             height={512}
             src={slides[currentIndex].url}
             alt={slides[currentIndex].title}
-            className={animate ? (direction === 'left' ? 'slide-fade-in-left' : 'slide-fade-in-right') : ''}
+            className={`carousel-image ${animate ? (direction === 'left' ? 'slide-fade-in-left' : 'slide-fade-in-right') : ''}`}
           />
         </div>
         <div className="bullet-container">

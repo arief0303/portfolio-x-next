@@ -48,6 +48,19 @@ body {
   transition: opacity 0.5s ease-in-out; /* This might be redundant with inline styles */
 }
 
+.carousel-container {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+}
+
+.carousel-container img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
 @keyframes fadeUp {
   from {
     opacity: 0;
@@ -172,6 +185,12 @@ body {
 
 .slide-fade-in-right {
   animation: slideFadeInRight 1s ease-in-out;
+}
+
+.slide-fade-in-left,
+.slide-fade-in-right {
+  width: 100%;
+  max-width: 100%;
 }
 
 .loading {
