@@ -17,6 +17,12 @@ export default function Carousel() {
   // useMemo to memoize the slides array
   const slides = useMemo(() => [
     {
+      url: '/images/closepay.png',
+      title: 'Closepay',
+      details: 'I specialised in pixel-perfect front-end development with a focus on React and Next.js. I am responsible for both development and UI design, utilising tools such as Figma to ensure seamless functionality and visually appealing user interfaces.',
+      category: 'Web Design & Development',
+    },
+    {
       url: '/images/demo21.gif',
       title: '3D Van Interior Configurator',
       details: 'I developed an online 3D product customizer using Three.js, a JavaScript library for 3D graphics. The web app lets users customize and preview vehicle interiors for a particular model of a van for the client.',
@@ -41,12 +47,6 @@ export default function Carousel() {
       title: 'Aspace',
       details: 'A prototype metaverse variant built on same technologies as Bitaverse for the client Sampoerna. Featuring additional components such as minimap for player navigation, location based audio system, LOD performance optimization, and player area based teleportation.',
       category: 'Web Development',
-    },
-    {
-      url: '/images/closepay.png',
-      title: 'Closepay',
-      details: 'I specialised in pixel-perfect front-end development with a focus on React and Next.js. I am responsible for both development and UI design, utilising tools such as Figma to ensure seamless functionality and visually appealing user interfaces.',
-      category: 'Web Design & Development',
     },
     /* {
     url: '/images/Screenshot4.png',
