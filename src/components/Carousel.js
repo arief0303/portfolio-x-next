@@ -43,9 +43,9 @@ export default function Carousel() {
     },
     {
       url: '/images/closepay.png',
-      title: 'ClosePay Fintech Solution',
-      details: 'A fintech solution designed to streamline payment processes for businesses and consumers. The web design focuses on user experience, security, and ease of use, ensuring a seamless transaction experience.',
-      category: 'Web Design',
+      title: 'Closepay',
+      details: 'I specialised in pixel-perfect front-end development with a focus on React and Next.js. I am responsible for both development and UI design, utilising tools such as Figma to ensure seamless functionality and visually appealing user interfaces.',
+      category: 'Web Design & Development',
     },
     /* {
     url: '/images/Screenshot4.png',
