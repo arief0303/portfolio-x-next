@@ -34,7 +34,7 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(to top, white, rgba(255, 255, 255, 0) 50%);
+  background: linear-gradient(0deg, rgba(228,235,245,1) 16%, rgba(0,212,255,0) 100%);
   pointer-events: none; /* Allows clicks to pass through */
 }
 
@@ -66,7 +66,7 @@ body {
 @keyframes fadeInTitle {
   from {
     opacity: 0;
-    transform: translateY(100%); /* Start from the right */
+    transform: translateY(20%); /* Start from the right */
   }
   to {
     opacity: 1;
@@ -91,12 +91,27 @@ body {
 }
 
 .fade-in-title {
-  animation: fadeInTitle 2s ease forwards;
+  animation: fadeInDetails 2s ease forwards;
+  animation-delay: 0.5s; /* Delay for the details animation */
 }
 
 .fade-in-details {
-  animation: fadeInDetails 2s ease forwards;
-  animation-delay: 0.5s; /* Delay for the details animation */
+  animation: fadeInTitle 2s ease forwards;
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(10%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fade-in-right {
+  animation: fadeInRight 1.5s ease-in-out;
 }
 
 .loading {
