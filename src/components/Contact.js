@@ -7,7 +7,7 @@ const Contact = () => {
     <Card rounded className='p-10 px-20 flex flex-col md:flex-row mx-5 md:mx-56'>
       <div className='flex flex-col items-center md:mr-8 mb-4 md:mb-0'>
         <img
-          src='/images/0005.jpg'
+          src='/images/profile.jpg'
           alt='Profile Picture'
           className='w-24 h-24 rounded-full mb-4 object-cover'
         />
