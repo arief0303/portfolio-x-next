@@ -118,7 +118,7 @@ export default function Carousel() {
 
   return (
     <>
-      <Card className='h-[120vh] lg:h-screen mt-10 mx-3 lg:mx-56'>
+      <Card className='h-[110vh] mt-10 mx-3 lg:mx-56'>
         <CardHeader
           title={
             <H6>
