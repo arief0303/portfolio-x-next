@@ -118,6 +118,62 @@ body {
   animation: fadeIn 1s ease-in-out;
 }
 
+@keyframes slideInLeft {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.slide-in-left {
+  animation: slideInLeft 1s ease-in-out;
+}
+
+.slide-in-right {
+  animation: slideInRight 1s ease-in-out;
+}
+
+@keyframes slideFadeInLeft {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideFadeInRight {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-fade-in-left {
+  animation: slideFadeInLeft 1s ease-in-out;
+}
+
+.slide-fade-in-right {
+  animation: slideFadeInRight 1s ease-in-out;
+}
+
 .loading {
   position: fixed;
   top: 0px;

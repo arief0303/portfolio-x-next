@@ -12,6 +12,7 @@ export default function Carousel() {
   const [animate, setAnimate] = useState(false);
   const [intervalDuration, setIntervalDuration] = useState(10000);
   const [isImageLoading, setIsImageLoading] = useState(true);
+  const [direction, setDirection] = useState('');
 
   // useMemo to memoize the slides array
   const slides = useMemo(() => [
@@ -64,11 +65,24 @@ export default function Carousel() {
   const { text, url, linkText } = slides[currentIndex].details;
 
   const handlers = useSwipeable({
-    onSwipedLeft: () => setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length),
-    onSwipedRight: () => setCurrentIndex((prevIndex) => (prevIndex - 1 + slides.length) % slides.length),
+    onSwipedLeft: () => {
+      setDirection('left');
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
+      setAnimate(true);
+    },
+    onSwipedRight: () => {
+      setDirection('right');
+      setCurrentIndex((prevIndex) => (prevIndex - 1 + slides.length) % slides.length);
+      setAnimate(true);
+    },
     preventDefaultTouchmoveEvent: true,
     trackMouse: true,
   });
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setAnimate(false), 1000); // 1 second delay
+    return () => clearTimeout(timeout);
+  }, [currentIndex]);
 
   const prevSlideBtnClick = () => {
     setShouldContinue(false);
@@ -160,7 +174,7 @@ export default function Carousel() {
             height={512}
             src={slides[currentIndex].url}
             alt={slides[currentIndex].title}
-            className={animate ? 'fade-in-image' : ''}
+            className={animate ? (direction === 'left' ? 'slide-fade-in-left' : 'slide-fade-in-right') : ''}
           />
         </div>
         <div className="bullet-container">
