@@ -31,7 +31,7 @@ export default function Carousel() {
     {
       url: '/images/bitaverse-demo.gif',
       title: 'Bitaverse',
-      details: 'A metaverse featuring multiplayer made for the client Dentsu by utilizing Babylon.js & Colyseus using React as the framework. I developed metaverses featuring multiplayer using Babylon.js and Colyseus. I used Babylon.js to create and render the 3D models, materials, lights, cameras, and scenes for the metaverses. I used Colyseus to create and manage the game rooms, state synchronization, networking, and interactivity for the multiplayer features. A beta prototype build can be checked out here.',
+      details: 'A metaverse featuring multiplayer made by utilizing Babylon.js, Colyseus, and React. I used Babylon.js to create and render the scenes for the metaverses. Colyseus is used to create and manage the game rooms, networking, and interactivity for the multiplayer features. A beta prototype build can be checked out here.',
       link: "https://beta.bitaverse.id/en",
       category: 'Web Development',
     },
