@@ -19,6 +19,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.2.1",
+    "react-swipeable": "^7.0.1",
     "three": "^0.165.0",
     "ui-neumorphism": "^1.1.3"
   },

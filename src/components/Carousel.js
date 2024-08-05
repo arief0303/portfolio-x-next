@@ -4,6 +4,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { overrideThemeVariables, Card, CardContent, Subtitle1, Subtitle2, H5, Body2, CardAction, Button, CardHeader, H6, IconButton, Icon, CardMedia, Spacer } from 'ui-neumorphism'
 import 'ui-neumorphism/dist/index.css'
+import { useSwipeable } from 'react-swipeable';
 
 export default function Carousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -40,6 +41,12 @@ export default function Carousel() {
       details: 'A prototype metaverse variant built on same technologies as Bitaverse for the client Sampoerna. Featuring additional components such as minimap for player navigation, location based audio system, LOD performance optimization, and player area based teleportation.',
       category: 'Web Development',
     },
+    {
+      url: '/images/closepay.png',
+      title: 'ClosePay Fintech Solution',
+      details: 'A fintech solution designed to streamline payment processes for businesses and consumers. The web design focuses on user experience, security, and ease of use, ensuring a seamless transaction experience.',
+      category: 'Web Design',
+    },
     /* {
     url: '/images/Screenshot4.png',
     title: 'Closepay',
@@ -55,6 +62,13 @@ export default function Carousel() {
 
   const isLastSlide = currentIndex === slides.length - 1;
   const { text, url, linkText } = slides[currentIndex].details;
+
+  const handlers = useSwipeable({
+    onSwipedLeft: () => setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length),
+    onSwipedRight: () => setCurrentIndex((prevIndex) => (prevIndex - 1 + slides.length) % slides.length),
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true,
+  });
 
   const prevSlideBtnClick = () => {
     setShouldContinue(false);
@@ -140,7 +154,14 @@ export default function Carousel() {
             </Subtitle2>
           }
         />
-        <CardMedia height={512} src={slides[currentIndex].url} />
+        <div {...handlers} className="carousel-container">
+          <CardMedia
+            component="img"
+            height={512}
+            src={slides[currentIndex].url}
+            alt={slides[currentIndex].title}
+          />
+        </div>
         <div className="bullet-container">
           {slides.map((_, index) => (
             <span
