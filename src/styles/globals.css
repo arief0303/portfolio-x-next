@@ -114,6 +114,10 @@ body {
   animation: fadeInRight 1.5s ease-in-out;
 }
 
+.fade-in-image {
+  animation: fadeIn 1s ease-in-out;
+}
+
 .loading {
   position: fixed;
   top: 0px;

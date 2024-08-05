@@ -160,6 +160,7 @@ export default function Carousel() {
             height={512}
             src={slides[currentIndex].url}
             alt={slides[currentIndex].title}
+            className={animate ? 'fade-in-image' : ''}
           />
         </div>
         <div className="bullet-container">
