@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react'
 import Image from 'next/image';
 
 export default function AnimatedText() {
-  const words = useMemo(() => ['Hello, I am ', "Hallo, ik ben ", "Bonjour, je m'appelle ", 'Hola, mi es ', 'Nǐ hǎo, wǒ shì ', "Kon'nichiwa, watashi wa ", "Hallo ich bin ", "Halo, nama saya "], []);
+  const words = useMemo(() => ['Hello, I am Arief', "Halo, nama saya Arief", "Hallo, ik ben Arief", "Hallo, ich bin Arief", "Bonjour, je m'appelle Arief", "Kon'nichiwa, watashi wa Arīfudesu",'Nǐ hǎo, wǒ shì Arief', 'Hola, mi es Arief'], []);
   const duration = 2000;
   const [index, setIndex] = useState(0);
 
@@ -25,7 +25,7 @@ export default function AnimatedText() {
               opacity: i === index ? 1 : 0,
             }}
           >
-            {word} Arief.
+            {word}.
           </h1>
         ))}
         <div className="flex justify-center items-center">
