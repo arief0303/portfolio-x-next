@@ -197,7 +197,7 @@ export default function Carousel() {
             height={512}
             src={slides[currentIndex].url}
             alt={slides[currentIndex].title}
-            className={`carousel-image ${animate ? (direction === 'left' ? 'slide-fade-in-left' : 'slide-fade-in-right') : ''}`}
+            className={`carousel-image ${animate ? (direction === 'left' ? 'fade-in' : 'fade-in') : ''}`}
           />
           <a
             onClick={handleNext}
