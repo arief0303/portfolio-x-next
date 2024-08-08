@@ -182,8 +182,7 @@ export default function Carousel() {
             </Subtitle2>
           }
         />
-        <div {...handlers} className="carousel-container">
-          {/* <IconButton rounded className="slider-button prev-button" onClick={handlePrev}> <Icon path={mdiChevronLeft} size={1} /></IconButton> */}
+                <div {...handlers} className="carousel-container hover-show-buttons">
           <a
             onClick={handlePrev}
             type="button"
@@ -209,7 +208,6 @@ export default function Carousel() {
               <Icon path={mdiChevronRight} size={1} className="icon" />
             </span>
           </a>
-          {/* <IconButton rounded className="slider-button next-button" onClick={handleNext}><Icon path={mdiChevronRight} size={1} /></IconButton> */}
         </div>
         <div className="bullet-container">
           {slides.map((_, index) => (
