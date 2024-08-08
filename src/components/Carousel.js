@@ -38,7 +38,7 @@ export default function Carousel() {
     {
       url: '/images/bitaverse-demo.gif',
       title: 'Bitaverse',
-      details: 'A metaverse featuring multiplayer made by utilizing Babylon.js, Colyseus, and React. I used Babylon.js to create and render the scenes for the metaverses. Colyseus is used to create and manage the game rooms, networking, and interactivity for the multiplayer features. A beta prototype build can be checked out here.',
+      details: 'A metaverse featuring multiplayer made by utilizing Babylon.js, Colyseus, and React. I used Babylon.js to create and render the scenes for the metaverses. Colyseus is used to create and manage the game rooms, networking, and interactivity for the multiplayer features. Beta version can be checked out here.',
       link: "https://beta.bitaverse.id/en",
       category: 'Web Development',
     },
@@ -197,13 +197,13 @@ export default function Carousel() {
 
             {slides[currentIndex].details && (
               <p className={`text-black text-lg font-light h-auto ${animate ? 'fade-in-details' : ''}`}>
-                {slides[currentIndex].details.includes("Check it out here.") || slides[currentIndex].details.includes("A beta prototype build can be checked out here.") ? (
+                {slides[currentIndex].details.includes("Check it out here.") || slides[currentIndex].details.includes("Beta version can be checked out here.") ? (
                   <>
-                    {slides[currentIndex].details.includes("A beta prototype build can be checked out here.") ? (
+                    {slides[currentIndex].details.includes("Beta version can be checked out here.") ? (
                       <>
-                        {slides[currentIndex].details.substring(0, slides[currentIndex].details.indexOf("A beta prototype build can be checked out here."))}
-                        <a href={slides[currentIndex].link} className="text-blue-500">A beta prototype build can be checked out here.</a>
-                        {slides[currentIndex].details.substring(slides[currentIndex].details.indexOf("A beta prototype build can be checked out here.") + "A beta prototype build can be checked out here.".length)}
+                        {slides[currentIndex].details.substring(0, slides[currentIndex].details.indexOf("Beta version can be checked out here."))}
+                        <a href={slides[currentIndex].link} className="text-blue-500">Beta version can be checked out here.</a>
+                        {slides[currentIndex].details.substring(slides[currentIndex].details.indexOf("Beta version can be checked out here.") + "Beta version can be checked out here.".length)}
                       </>
                     ) : (
                       <>
