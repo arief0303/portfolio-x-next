@@ -2,9 +2,11 @@ import React, { useEffect, useState, useMemo, useCallback } from 'react'
 import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { overrideThemeVariables, Card, CardContent, Subtitle1, Subtitle2, H5, Body2, CardAction, Button, CardHeader, H6, IconButton, Icon, CardMedia, Spacer } from 'ui-neumorphism'
+import { overrideThemeVariables, Card, CardContent, Subtitle1, Subtitle2, H5, Body2, CardAction, Button, CardHeader, H6, IconButton, CardMedia, Spacer } from 'ui-neumorphism'
 import 'ui-neumorphism/dist/index.css'
 import { useSwipeable } from 'react-swipeable';
+import Icon from '@mdi/react';
+import { mdiChevronLeft, mdiChevronRight } from '@mdi/js';
 
 export default function Carousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -114,6 +116,18 @@ export default function Carousel() {
     setCurrentIndex(slideIndex);
   };
 
+  const handlePrev = () => {
+    setDirection('right');
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + slides.length) % slides.length);
+    setAnimate(true);
+  };
+
+  const handleNext = () => {
+    setDirection('left');
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
+    setAnimate(true);
+  };
+
   //for every second change the slide
   useEffect(() => {
     // Preload images only when slides change
@@ -169,6 +183,16 @@ export default function Carousel() {
           }
         />
         <div {...handlers} className="carousel-container">
+          {/* <IconButton rounded className="slider-button prev-button" onClick={handlePrev}> <Icon path={mdiChevronLeft} size={1} /></IconButton> */}
+          <a
+            onClick={handlePrev}
+            type="button"
+            className="slider-button prev-button rounded-full bg-transparent p-3 font-medium uppercase leading-normal text-surface transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-none focus:ring-0 dark:text-black dark:hover:bg-secondary-900"
+            data-twe-ripple-init>
+            <span className="mx-auto icon-container">
+              <Icon path={mdiChevronLeft} size={1} className="icon" />
+            </span>
+          </a>
           <CardMedia
             component="img"
             height={512}
@@ -176,6 +200,16 @@ export default function Carousel() {
             alt={slides[currentIndex].title}
             className={`carousel-image ${animate ? (direction === 'left' ? 'slide-fade-in-left' : 'slide-fade-in-right') : ''}`}
           />
+          <a
+            onClick={handleNext}
+            type="button"
+            className="slider-button next-button rounded-full bg-transparent p-3 font-medium uppercase leading-normal text-surface transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-none focus:ring-0 dark:text-black dark:hover:bg-secondary-900"
+            data-twe-ripple-init>
+            <span className="mx-auto icon-container">
+              <Icon path={mdiChevronRight} size={1} className="icon" />
+            </span>
+          </a>
+          {/* <IconButton rounded className="slider-button next-button" onClick={handleNext}><Icon path={mdiChevronRight} size={1} /></IconButton> */}
         </div>
         <div className="bullet-container">
           {slides.map((_, index) => (
@@ -194,7 +228,6 @@ export default function Carousel() {
         </div>
         <CardContent>
           <Body2 className='mt-10'>
-
             {slides[currentIndex].details && (
               <p className={`text-black text-lg font-light h-auto ${animate ? 'fade-in-details' : ''}`}>
                 {slides[currentIndex].details.includes("Check it out here.") || slides[currentIndex].details.includes("Beta version can be checked out here.") ? (
