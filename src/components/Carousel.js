@@ -21,22 +21,29 @@ export default function Carousel() {
     {
       url: '/images/closepay.png',
       title: 'Closepay',
-      details: 'I specialised in pixel-perfect front-end development with a focus on React and Next.js. I am responsible for both development and UI design, utilising tools such as Figma to ensure seamless functionality and visually appealing user interfaces.',
+      details: 'I specialise in pixel-perfect front-end development with a focus on React and Next.js. I am responsible for both development and UI design, utilizing Figma to ensure seamless functionality and visually appealing user interfaces.',
       category: 'Web Design & Development',
+    },
+    {
+      url: '/images/regan_harney.gif',
+      title: 'Regan Harney',
+      details: 'Developed bespoke 3D watch model viewer and animations for the main website of reganharney.com. As well as additional high-poly 3D asset optimization and remodelling.',
+      link: "https://reganharney.com",
+      category: 'Web Development',
     },
     {
       url: '/images/demo21.gif',
       title: '3D Van Interior Configurator',
-      details: 'I developed an online 3D product customizer using Three.js, a JavaScript library for 3D graphics. The web app lets users customize and preview vehicle interiors for a particular model of a van for the client.',
+      details: 'Developed an online 3D product customizer using vanilla Javascript & Three.js. The web app lets users customise and preview vehicle interiors for a particular model of a van.',
       category: 'Web Development',
     },
-    {
+    /* {
       url: '/images/customizer-demo.gif',
       title: 'Shoe Configurator Demo',
       details: "A demo of a shoe customizer using React Three Fiber (a Three.js library wrapper for React & Next.js) this particular site is build on top of Next.js framework. The web app lets users customize a shoe color material by simply clicking each part of the shoe and modify its material. Check it out here.",
       link: "https://konfigurator-one.vercel.app/",
       category: 'Web Development',
-    },
+    }, */
     {
       url: '/images/bitaverse-demo.gif',
       title: 'Bitaverse',
@@ -228,7 +235,7 @@ export default function Carousel() {
           <Body2 className='mt-10'>
             {slides[currentIndex].details && (
               <p className={`text-black text-lg font-light h-auto ${animate ? 'fade-in-details' : ''}`}>
-                {slides[currentIndex].details.includes("Check it out here.") || slides[currentIndex].details.includes("Beta version can be checked out here.") ? (
+                {slides[currentIndex].details.includes("reganharney.com") || slides[currentIndex].details.includes("Beta version can be checked out here.") ? (
                   <>
                     {slides[currentIndex].details.includes("Beta version can be checked out here.") ? (
                       <>
@@ -238,9 +245,9 @@ export default function Carousel() {
                       </>
                     ) : (
                       <>
-                        {slides[currentIndex].details.substring(0, slides[currentIndex].details.indexOf("Check it out here."))}
-                        <a href={slides[currentIndex].link} className="text-blue-500">Check it out here.</a>
-                        {slides[currentIndex].details.substring(slides[currentIndex].details.indexOf("Check it out here.") + "Check it out here.".length)}
+                        {slides[currentIndex].details.substring(0, slides[currentIndex].details.indexOf("reganharney.com"))}
+                        <a href={slides[currentIndex].link} className="text-blue-500">reganharney.com</a>
+                        {slides[currentIndex].details.substring(slides[currentIndex].details.indexOf("reganharney.com") + "reganharney.com".length)}
                       </>
                     )}
                   </>
