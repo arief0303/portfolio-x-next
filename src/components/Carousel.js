@@ -21,9 +21,10 @@ export default function Carousel() {
     {
       url: '/images/closepay.png',
       title: 'Closepay',
-      details: 'I specialise in pixel-perfect front-end development with a focus on React and Next.js. I am responsible for both development and UI design, utilizing Figma to ensure seamless functionality and visually appealing user interfaces.',
+      details: 'I specialize in crafting flawless front-end experiences using React and Next.js, primarily for SaaS platforms. I handle both coding and UI design, leveraging Figma to create functional and visually engaging interfaces.',
       category: 'Web Design & Development',
     },
+    
     {
       url: '/images/regan_harney.gif',
       title: 'Regan Harney',
@@ -34,7 +35,7 @@ export default function Carousel() {
     {
       url: '/images/demo21.gif',
       title: '3D Van Interior Configurator',
-      details: 'Developed an online 3D product customizer using vanilla Javascript & Three.js. The web app lets users customise and preview vehicle interiors for a particular model of a van.',
+      details: 'I created an online 3D product customizer with Three.js. This web app allows users to customize and preview the interiors of a specific van model for the client.This project strengthened my Three.js expertise and highlighted my ability to optimize complex 3D web applications.',
       category: 'Web Development',
     },
     /* {
