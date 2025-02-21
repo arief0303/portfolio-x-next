@@ -12,19 +12,19 @@ export default function Carousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [shouldContinue, setShouldContinue] = useState(true);
   const [animate, setAnimate] = useState(false);
-  const [intervalDuration, setIntervalDuration] = useState(10000);
+  const [intervalDuration, setIntervalDuration] = useState(15000);
   const [isImageLoading, setIsImageLoading] = useState(true);
   const [direction, setDirection] = useState('');
 
   // useMemo to memoize the slides array
   const slides = useMemo(() => [
-    {
+    /* {
       url: '/images/closepay.png',
       title: 'Closepay',
       details: 'I specialize in crafting flawless front-end experiences using React and Next.js, primarily for SaaS platforms. I handle both coding and UI design, leveraging Figma to create functional and visually engaging interfaces.',
       category: 'Web Design & Development',
-    },
-    
+    }, */
+
     {
       url: '/images/regan_harney.gif',
       title: 'Regan Harney',
@@ -49,7 +49,7 @@ export default function Carousel() {
       url: '/images/bitaverse-demo.gif',
       title: 'Bitaverse',
       details: 'A metaverse featuring multiplayer made by utilizing Babylon.js, Colyseus, and React. I used Babylon.js to create and render the scenes for the metaverses. Colyseus is used to create and manage the game rooms, networking, and interactivity for the multiplayer features. Beta version can be checked out here.',
-      link: "https://beta.bitaverse.id/en",
+      link: "https://bitaverse-developer-build-oend.vercel.app/",
       category: 'Web Development',
     },
     {
@@ -190,7 +190,7 @@ export default function Carousel() {
             </Subtitle2>
           }
         />
-                <div {...handlers} className="carousel-container hover-show-buttons">
+        <div {...handlers} className="carousel-container hover-show-buttons">
           <a
             onClick={handlePrev}
             type="button"
