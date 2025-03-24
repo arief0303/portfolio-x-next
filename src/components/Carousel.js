@@ -18,12 +18,12 @@ export default function Carousel() {
 
   // useMemo to memoize the slides array
   const slides = useMemo(() => [
-    /* {
+    {
       url: '/images/closepay.png',
       title: 'Closepay',
       details: 'I specialize in crafting flawless front-end experiences using React and Next.js, primarily for SaaS platforms. I handle both coding and UI design, leveraging Figma to create functional and visually engaging interfaces.',
       category: 'Web Design & Development',
-    }, */
+    },
 
     {
       url: '/images/regan_harney.gif',
