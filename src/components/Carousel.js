@@ -28,7 +28,7 @@ export default function Carousel() {
     {
       url: '/images/regan_harney.gif',
       title: 'Regan Harney',
-      details: 'Developed bespoke 3D watch model viewer and animations for the main website of reganharney.com. As well as additional high-poly 3D asset optimization and remodelling.',
+      details: 'Developed a custom 3D watch model viewer with smooth animations for the main website of reganharney.com, seamlessly integrating interactive components using React Three Fiber (R3F) within a Shopify Hydrogen (React) environment. Also handled high-poly 3D asset optimization and remodeling to ensure performance and visual fidelity.',
       link: "https://reganharney.com",
       category: 'Web Development',
     },

@@ -84,6 +84,18 @@ export default function Footer() {
           </a>
 
           <a
+            href="mailto:arief0303@gmail.com"
+            type="button"
+            className="rounded-full bg-transparent p-3 font-medium uppercase leading-normal text-surface transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-none focus:ring-0 dark:text-black dark:hover:bg-secondary-900"
+            data-twe-ripple-init>
+            <span className="mx-auto [&>svg]:h-5 [&>svg]:w-5">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20,4H4C2.9,4,2,4.9,2,6v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z"/>
+              </svg>
+            </span>
+          </a>
+
+          <a
             href="https://github.com/arief0303"
             type="button"
             className="rounded-full bg-transparent p-3 font-medium uppercase leading-normal text-surface transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-none focus:ring-0 dark:text-black dark:hover:bg-secondary-900"
