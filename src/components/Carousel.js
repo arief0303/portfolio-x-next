@@ -18,24 +18,18 @@ export default function Carousel() {
 
   // useMemo to memoize the slides array
   const slides = useMemo(() => [
-    {
+    /* {
       url: '/images/closepay.png',
       title: 'Closepay',
-      details: 'I specialize in crafting flawless front-end experiences using React and Next.js, primarily for SaaS platforms. I handle both coding and UI design, leveraging Figma to create functional and visually engaging interfaces.',
+      details: 'Front-end heavy Fullstack SaaS development using MERN stack for PT.Teknologi Kartu Indonesia. I handle both coding and UI design.',
       category: 'Web Design & Development',
-    },
+    }, */
 
     {
       url: '/images/regan_harney.gif',
       title: 'Regan Harney',
-      details: 'Developed a custom 3D watch model viewer with smooth animations for the main website of reganharney.com, seamlessly integrating interactive components using React Three Fiber (R3F) within a Shopify Hydrogen (React) environment. Also handled high-poly 3D asset optimization and remodeling to ensure performance and visual fidelity.',
+      details: 'Built a high-fidelity 3D watch viewer with smooth animations and interactive elements using React Three Fiber, fully integrated into a Shopify Hydrogen storefront. Optimised high-poly assets and handled 3D remodeling to balance visual quality with performance. This project demonstrated my skills in combining technical precision with creative 3D presentation in a real-world e-commerce setting.',
       link: "https://reganharney.com",
-      category: 'Web Development',
-    },
-    {
-      url: '/images/demo21.gif',
-      title: '3D Van Interior Configurator',
-      details: 'I created an online 3D product customizer with Three.js. This web app allows users to customize and preview the interiors of a specific van model for the client.This project strengthened my Three.js expertise and highlighted my ability to optimize complex 3D web applications.',
       category: 'Web Development',
     },
     /* {
@@ -48,15 +42,21 @@ export default function Carousel() {
     {
       url: '/images/bitaverse-demo.gif',
       title: 'Bitaverse',
-      details: 'A metaverse featuring multiplayer made by utilizing Babylon.js, Colyseus, and React. I used Babylon.js to create and render the scenes for the metaverses. Colyseus is used to create and manage the game rooms, networking, and interactivity for the multiplayer features. Beta version can be checked out here.',
+      details: 'Developed a browser-based metaverse experience with real-time multiplayer functionality using Babylon.js for 3D scene rendering and React for the interface. Integrated Colyseus to handle multiplayer networking, room management, and player interactions. This project demonstrates my ability to build immersive, interactive 3D environments with scalable multiplayer architecture.',
       link: "https://bitaverse-developer-build-oend.vercel.app/",
-      category: 'Web Development',
+      category: 'Game Development',
     },
-    {
+    /* {
       url: '/images/aspace-demo.gif',
       title: 'Aspace',
       details: 'A prototype metaverse variant built on same technologies as Bitaverse for the client Sampoerna. Featuring additional components such as minimap for player navigation, location based audio system, LOD performance optimization, and player area based teleportation.',
       category: 'Web Development',
+    }, */
+    {
+      url: '/images/demo21.gif',
+      title: '3D Van Interior Configurator',
+      details: 'Developed an interactive 3D van interior customizer during a paid internship using vanilla Three.js. The application enables users to personalise and preview interior configurations of a specific van model in real time. This project provided my first professional experience in 3D web development.',
+      category: '3D Web Development',
     },
     /* {
     url: '/images/Screenshot4.png',
