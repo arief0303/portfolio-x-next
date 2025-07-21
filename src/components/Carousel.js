@@ -42,7 +42,7 @@ export default function Carousel() {
     {
       url: '/images/bitaverse-demo.gif',
       title: 'Bitaverse',
-      details: 'Developed a browser-based metaverse experience with real-time multiplayer functionality using Babylon.js for 3D scene rendering and React for the interface. Integrated Colyseus to handle multiplayer networking, room management, and player interactions. This project demonstrates my ability to build immersive, interactive 3D environments with scalable multiplayer architecture.',
+      details: 'Contracted by PT. DSH to develop a browser-based metaverse experience featuring real-time multiplayer capabilities. Utilised Babylon.js for rendering immersive 3D environments and React for the user interface. Integrated Colyseus to manage multiplayer networking, game rooms, and player interactions. This project highlights my ability to deliver performant, scalable 3D web applications with real-time functionality.',
       link: "https://bitaverse-developer-build-oend.vercel.app/",
       category: 'Game Development',
     },
