@@ -16,6 +16,29 @@ import Loader from '@/components/Loader';
 // import { overrideThemeVariables, Card, CardContent, Subtitle1, Subtitle2, H5, Body2, CardAction, Button } from 'ui-neumorphism'
 // import 'ui-neumorphism/dist/index.css'
 import Image from 'next/image';
+import Technologies from '@/components/Technologies';
+import PortfolioCarousel from '@/components/PortfolioCarousel';
+
+const sampleProjects = [
+  {
+    title: "3D Portfolio Website",
+    description: "A WebGL-powered portfolio made with Three.js and R3F.",
+    src: "/images/closepay.png",
+    type: "image",
+  },
+  {
+    title: "Landing Page Video Demo",
+    description: "Preview of an animated website built with GSAP.",
+    src: "/videos/regan-harney.mp4",
+    type: "video",
+  },
+  /* {
+    title: "E-commerce UI Kit",
+    description: "Responsive UI design built with Tailwind CSS.",
+    src: "/assets/project2.png",
+    type: "image",
+  }, */
+];
 
 export default function Home() {
   const [isClient, setIsClient] = useState(false);
@@ -38,7 +61,7 @@ export default function Home() {
         <div className='flex flex-col absolute bottom-0 left-0 right-0 pointer-events-none'>
           <div className='md:mb-40 md:ml-10'>
             <AnimatedText />
-            <div className='text-black text-center md:text-left text-2xl'>Creative Technologist</div>
+            <div className='text-black text-center md:text-left text-2xl'>Creative Technologist | Medior Fullstack Developer</div>
             <div className='flex justify-center md:justify-start pointer-events-auto mt-3 md:mb-0 mb-4'>
               <button className='text-black nm-convex-white-lg rounded-full py-2 px-4'>Resume</button>
               <button className='text-blue-600 nm-convex-white-lg rounded-full py-2 px-4 ml-3'>Contact</button>
@@ -56,7 +79,13 @@ export default function Home() {
         >
         </div>
       </div>
-      <p className='flex text-black text-center font-bold text-5xl p-9 bg-light h-screen'></p>
+      <div className='bg-light'>
+        <Technologies />
+        <div className='flex flex-col items-center justify-center pt-64 md:pt-10 max-w-96'>
+        {/* <div className='flex flex-col items-center justify-center min-w-[120px] md:min-w-[180px]'> */}
+          <PortfolioCarousel projects={sampleProjects} />
+        </div>
+      </div>
       {/* <div className='w-screen h-screen bg-light flex justify-center'>
         {isClient && <Carousel />}
       </div> */}

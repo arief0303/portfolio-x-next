@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react'
 
 export default function AnimatedText() {
-  const words = useMemo(() => ['Hello, I am Arief', "Hallo, ich bin Arief", "Hallo, ik ben Arief", "Halo, nama saya Arief",  "Bonjour, je m'appelle Arief", "Kon'nichiwa, watashi wa Arīfudesu", 'Nǐ hǎo, wǒ shì Arief'], []);
+  const words = useMemo(() => ['Hello, I am Arief', "Hallo, ich bin Arief", "Hallo, ik ben Arief", "Halo, saya Arief",  "Bonjour, je m'appelle Arief", "Kon'nichiwa, watashi wa Arīfudesu", 'Nǐ hǎo, wǒ shì Arief'], []);
   const duration = 2000;
   const [index, setIndex] = useState(0);
 

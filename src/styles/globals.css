@@ -39,6 +39,23 @@ body {
   pointer-events: none; /* Allows clicks to pass through */
 }
 
+.gradient-overlay-edges {
+  position: relative;
+  z-index: 10;
+}
+
+.gradient-overlay-edges::before {
+  pointer-events: none; /* Allows clicks to pass through */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, rgba(228, 235, 245, 1) 0%, rgba(0, 0, 0, 0) 50%, rgba(228, 235, 245, 1) 100%);
+  z-index: 1;
+}
+
 .word-fade {
   height: 1.2em;
 }
