@@ -2,8 +2,8 @@ import React, { useEffect, useState, useMemo, useCallback } from 'react'
 import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { overrideThemeVariables, Card, CardContent, Subtitle1, Subtitle2, H5, Body2, CardAction, Button, CardHeader, H6, IconButton, CardMedia, Spacer } from 'ui-neumorphism'
-import 'ui-neumorphism/dist/index.css'
+// import { overrideThemeVariables, Card, CardContent, Subtitle1, Subtitle2, H5, Body2, CardAction, Button, CardHeader, H6, IconButton, CardMedia, Spacer } from 'ui-neumorphism'
+// import 'ui-neumorphism/dist/index.css'
 import { useSwipeable } from 'react-swipeable';
 import Icon from '@mdi/react';
 import { mdiChevronLeft, mdiChevronRight } from '@mdi/js';

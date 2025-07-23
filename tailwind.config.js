@@ -14,10 +14,10 @@ module.exports = {
       },
       colors: {
         light: '#e4ebf5',
-        primary: 'e4ebf5',
+        primary: '#e4ebf5',
         secondary: '#C2C9D1',
       },
     },
   },
-  plugins: [],
+  plugins: [require('tw-neumorphism')],
 };

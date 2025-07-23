@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@plugin "tw-neumorphism";
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -45,7 +46,20 @@ body {
 .word {
   position: absolute;
   width: 100%;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
   transition: opacity 0.5s ease-in-out; /* This might be redundant with inline styles */
+}
+
+.multi-line-text {
+  white-space: normal;
+  margin-bottom: 1rem; /* Adjust value as needed */
+  display: inline-block;
+}
+
+/* For single line text, no margin is needed */
+.multi-line-text:not(:has(br)) {
+  margin-bottom: 0;
 }
 
 .icon {

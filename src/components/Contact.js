@@ -1,6 +1,6 @@
 import React from 'react'
-import { overrideThemeVariables, Card, CardContent, Subtitle1, Subtitle2, H5, Body2, CardAction, Button, CardHeader, H6, IconButton, Icon, CardMedia, Spacer } from 'ui-neumorphism'
-import 'ui-neumorphism/dist/index.css'
+// import { overrideThemeVariables, Card, CardContent, Subtitle1, Subtitle2, H5, Body2, CardAction, Button, CardHeader, H6, IconButton, Icon, CardMedia, Spacer } from 'ui-neumorphism'
+// import 'ui-neumorphism/dist/index.css'
 
 const Contact = () => {
   return (
