@@ -1,75 +1,435 @@
-import React, { useRef, useEffect, useState } from "react";
-import PortfolioCard from "./PortfolioCard";
-import { ChevronLeft, ChevronRight } from "lucide-react"; // or use your own icons
+import React, { useRef, useState, useEffect, Suspense } from 'react';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Text, OrbitControls, useTexture, useVideoTexture } from '@react-three/drei';
+import * as THREE from 'three';
+import { ChevronLeft, ChevronRight, ExternalLink, Github } from 'lucide-react';
 
-const PortfolioCarousel = ({ projects, autoPlay = false, autoPlayInterval = 5000 }) => {
-  const carouselRef = useRef(null);
-  const isDragging = useRef(false);
-  const startX = useRef(0);
-  const scrollLeft = useRef(0);
+// Mock portfolio data with media support
+const portfolioProjects = [
+  {
+    id: 1,
+    title: "E-Commerce Platform",
+    description: "Full-stack web application with React, Node.js, and MongoDB",
+    media: {
+      type: "image",
+      src: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop",
+      fallback: "#6366f1"
+    },
+    tech: ["React", "Node.js", "MongoDB"],
+    liveUrl: "#",
+    githubUrl: "#"
+  },
+  {
+    id: 2,
+    title: "AI Chat Assistant",
+    description: "Intelligent chatbot with natural language processing capabilities",
+    media: {
+      type: "video",
+      src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      poster: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=300&fit=crop",
+      fallback: "#10b981"
+    },
+    tech: ["Python", "TensorFlow", "FastAPI"],
+    liveUrl: "#",
+    githubUrl: "#"
+  },
+  {
+    id: 3,
+    title: "Mobile Fitness App",
+    description: "Cross-platform mobile application for fitness tracking",
+    media: {
+      type: "image",
+      src: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+      fallback: "#f59e0b"
+    },
+    tech: ["React Native", "Firebase", "Redux"],
+    liveUrl: "#",
+    githubUrl: "#"
+  },
+  {
+    id: 4,
+    title: "Data Visualization Dashboard",
+    description: "Interactive dashboard for real-time analytics and insights",
+    media: {
+      type: "video",
+      src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+      poster: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
+      fallback: "#ef4444"
+    },
+    tech: ["D3.js", "Vue.js", "PostgreSQL"],
+    liveUrl: "#",
+    githubUrl: "#"
+  },
+  {
+    id: 5,
+    title: "Blockchain Voting System",
+    description: "Secure and transparent voting platform using blockchain technology",
+    media: {
+      type: "image",
+      src: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400&h=300&fit=crop",
+      fallback: "#8b5cf6"
+    },
+    tech: ["Solidity", "Web3.js", "Ethereum"],
+    liveUrl: "#",
+    githubUrl: "#"
+  }
+];
 
-  const scrollBy = (amount) => {
-    carouselRef.current.scrollBy({ left: amount, behavior: "smooth" });
-  };
+function ProjectCard({ project, position, isActive, onClick }) {
+  const meshRef = useRef();
+  
+  // Use proper drei hooks for media loading
+  let texture = null;
+  let videoProps = {};
+  
+  try {
+    if (project.media.type === 'image') {
+      texture = useTexture(project.media.src);
+    } else if (project.media.type === 'video') {
+      texture = useVideoTexture(project.media.src);
+      videoProps = {
+        muted: true,
+        loop: true,
+        playsInline: true
+      };
+    }
+  } catch (error) {
+    console.log('Media loading failed for:', project.title);
+    texture = null;
+  }
+  
+  useFrame((state) => {
+    if (meshRef.current) {
+      // Smooth rotation animation
+      meshRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.05;
+      
+      // Scale effect for active card
+      const targetScale = isActive ? 1.1 : 1;
+      meshRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.1);
+      
+      // Hover effect
+      if (isActive) {
+        meshRef.current.position.z = THREE.MathUtils.lerp(meshRef.current.position.z, 0.5, 0.1);
+      } else {
+        meshRef.current.position.z = THREE.MathUtils.lerp(meshRef.current.position.z, 0, 0.1);
+      }
+    }
+  });
 
-  const handleMouseDown = (e) => {
-    isDragging.current = true;
-    startX.current = e.pageX - carouselRef.current.offsetLeft;
-    scrollLeft.current = carouselRef.current.scrollLeft;
-  };
-
-  const handleMouseLeave = () => (isDragging.current = false);
-  const handleMouseUp = () => (isDragging.current = false);
-
-  const handleMouseMove = (e) => {
-    if (!isDragging.current) return;
-    e.preventDefault();
-    const x = e.pageX - carouselRef.current.offsetLeft;
-    const walk = (x - startX.current) * 1.5;
-    carouselRef.current.scrollLeft = scrollLeft.current - walk;
-  };
-
-  // Optional autoplay
+  // Handle video play/pause for active cards
   useEffect(() => {
-    if (!autoPlay) return;
-    const interval = setInterval(() => {
-      scrollBy(300);
-    }, autoPlayInterval);
-    return () => clearInterval(interval);
-  }, [autoPlay, autoPlayInterval]);
+    if (texture && texture.image && texture.image.tagName === 'VIDEO') {
+      const video = texture.image;
+      if (isActive) {
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    }
+  }, [isActive, texture]);
+
+  // Get fallback color
+  const getFallbackColor = () => {
+    const colors = ['#6366f1', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
+    return colors[(project.id - 1) % colors.length];
+  };
 
   return (
-    <div className="relative w-full">
-      {/* Left Arrow */}
-      <button
-        onClick={() => scrollBy(-300)}
-        className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 p-2 bg-white dark:bg-gray-900 rounded-full shadow-md"
+    <group position={position} onClick={onClick}>
+      {/* Main card */}
+      <mesh ref={meshRef} castShadow receiveShadow>
+        <boxGeometry args={[4, 3, 0.2]} />
+        {texture ? (
+          <meshStandardMaterial 
+            map={texture}
+            metalness={0.1}
+            roughness={0.3}
+          />
+        ) : (
+          <meshStandardMaterial 
+            color={getFallbackColor()}
+            metalness={0.3}
+            roughness={0.4}
+          />
+        )}
+      </mesh>
+      
+      {/* Card border/frame */}
+      <mesh position={[0, 0, 0.11]}>
+        <boxGeometry args={[4.1, 3.1, 0.05]} />
+        <meshStandardMaterial color="#ffffff" metalness={0.8} roughness={0.2} />
+      </mesh>
+      
+      {/* Media type indicator */}
+      <mesh position={[1.7, 1.2, 0.12]}>
+        <sphereGeometry args={[0.08]} />
+        <meshStandardMaterial 
+          color={project.media.type === 'video' ? '#ef4444' : '#10b981'} 
+          emissive={project.media.type === 'video' ? '#ef4444' : '#10b981'}
+          emissiveIntensity={0.2}
+        />
+      </mesh>
+      
+      {/* Project title */}
+      <Text
+        position={[0, -1.8, 0.2]}
+        fontSize={0.15}
+        color="#ffffff"
+        anchorX="center"
+        anchorY="middle"
+        maxWidth={3.5}
       >
-        <ChevronLeft size={24} />
-      </button>
+        {project.title}
+      </Text>
+      
+      {/* Tech stack */}
+      <Text
+        position={[0, -2.1, 0.2]}
+        fontSize={0.08}
+        color="#cccccc"
+        anchorX="center"
+        anchorY="middle"
+        maxWidth={3.5}
+      >
+        {project.tech.join(' • ')}
+      </Text>
+      
+      {/* Status indicator */}
+      <Text
+        position={[0, -2.4, 0.2]}
+        fontSize={0.06}
+        color={texture ? '#10b981' : '#f59e0b'}
+        anchorX="center"
+        anchorY="middle"
+      >
+        {texture ? `${project.media.type.toUpperCase()} LOADED` : 'FALLBACK'}
+      </Text>
+    </group>
+  );
+}
 
-      {/* Right Arrow */}
-      <button
-        onClick={() => scrollBy(300)}
-        className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 p-2 bg-white dark:bg-gray-900 rounded-full shadow-md"
-      >
-        <ChevronRight size={24} />
-      </button>
+function Scene({ projects, currentIndex, onProjectClick }) {
+  const groupRef = useRef();
+  const { camera } = useThree();
+  
+  useFrame(() => {
+    // Smooth camera movement
+    const targetX = -(currentIndex * 5);
+    if (groupRef.current) {
+      groupRef.current.position.x = THREE.MathUtils.lerp(
+        groupRef.current.position.x,
+        targetX,
+        0.1
+      );
+    }
+  });
 
-      <div
-        ref={carouselRef}
-        className="flex gap-6 px-8 py-8 overflow-x-auto scroll-smooth"
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseLeave}
-        onMouseMove={handleMouseMove}
-      >
+  useEffect(() => {
+    // Set initial camera position
+    camera.position.set(0, 1, 10);
+    camera.lookAt(0, 0, 0);
+  }, [camera]);
+
+  return (
+    <>
+      {/* Lighting */}
+      <ambientLight intensity={0.6} />
+      <directionalLight 
+        position={[10, 10, 5]} 
+        intensity={0.8}
+        castShadow
+        shadow-mapSize-width={1024}
+        shadow-mapSize-height={1024}
+      />
+      <pointLight position={[0, 5, 5]} intensity={0.4} color="#ffffff" />
+      
+      {/* Projects with Suspense for media loading */}
+      <group ref={groupRef}>
         {projects.map((project, index) => (
-          <PortfolioCard key={index} project={project} />
+          <Suspense 
+            key={project.id}
+            fallback={
+              <group position={[index * 5, 0, 0]}>
+                <mesh castShadow receiveShadow>
+                  <boxGeometry args={[4, 3, 0.2]} />
+                  <meshStandardMaterial color="#666666" />
+                </mesh>
+                <Text
+                  position={[0, 0, 0.2]}
+                  fontSize={0.2}
+                  color="#ffffff"
+                  anchorX="center"
+                  anchorY="middle"
+                >
+                  Loading...
+                </Text>
+              </group>
+            }
+          >
+            <ProjectCard
+              project={project}
+              position={[index * 5, 0, 0]}
+              isActive={index === currentIndex}
+              onClick={() => onProjectClick(index)}
+            />
+          </Suspense>
         ))}
+      </group>
+      
+      {/* Ground plane */}
+      <mesh position={[0, -3, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
+        <planeGeometry args={[50, 50]} />
+        <meshPhysicalMaterial 
+          color="#f8fafc"
+          metalness={0.1}
+          roughness={0.8}
+          transparent
+          opacity={0.8}
+        />
+      </mesh>
+      
+      <OrbitControls 
+        enablePan={false}
+        enableZoom={true}
+        minDistance={5}
+        maxDistance={15}
+        maxPolarAngle={Math.PI / 2.2}
+      />
+    </>
+  );
+}
+
+export default function PortfolioCarousel() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  
+  const currentProject = portfolioProjects[currentIndex];
+
+  // Auto-play functionality
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+    
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % portfolioProjects.length);
+    }, 4000);
+    
+    return () => clearInterval(interval);
+  }, [isAutoPlaying]);
+
+  const handlePrevious = () => {
+    setIsAutoPlaying(false);
+    setCurrentIndex((prev) => 
+      prev === 0 ? portfolioProjects.length - 1 : prev - 1
+    );
+  };
+
+  const handleNext = () => {
+    setIsAutoPlaying(false);
+    setCurrentIndex((prev) => (prev + 1) % portfolioProjects.length);
+  };
+
+  const handleProjectClick = (index) => {
+    setIsAutoPlaying(false);
+    setCurrentIndex(index);
+  };
+
+  return (
+    <div className="w-full h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 relative overflow-hidden">
+      {/* 3D Canvas */}
+      <Canvas shadows className="w-full h-full">
+        <Scene 
+          projects={portfolioProjects}
+          currentIndex={currentIndex}
+          onProjectClick={handleProjectClick}
+        />
+      </Canvas>
+      
+      {/* UI Overlay */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Navigation Controls */}
+        <div className="absolute top-1/2 left-4 transform -translate-y-1/2 pointer-events-auto">
+          <button
+            onClick={handlePrevious}
+            className="p-3 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-all duration-300 hover:scale-110"
+          >
+            <ChevronLeft className="w-6 h-6 text-white" />
+          </button>
+        </div>
+        
+        <div className="absolute top-1/2 right-4 transform -translate-y-1/2 pointer-events-auto">
+          <button
+            onClick={handleNext}
+            className="p-3 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-all duration-300 hover:scale-110"
+          >
+            <ChevronRight className="w-6 h-6 text-white" />
+          </button>
+        </div>
+        
+        {/* Project Info Panel */}
+        <div className="absolute bottom-8 left-8 right-8 pointer-events-auto">
+          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20">
+            <div className="flex justify-between items-start mb-4">
+              <div>
+                <h2 className="text-2xl font-bold text-white mb-2">
+                  {currentProject.title}
+                </h2>
+                <p className="text-white/80 text-lg max-w-2xl">
+                  {currentProject.description}
+                </p>
+              </div>
+              <div className="flex space-x-3">
+                <button className="p-2 bg-white/20 rounded-lg hover:bg-white/30 transition-colors">
+                  <ExternalLink className="w-5 h-5 text-white" />
+                </button>
+                <button className="p-2 bg-white/20 rounded-lg hover:bg-white/30 transition-colors">
+                  <Github className="w-5 h-5 text-white" />
+                </button>
+              </div>
+            </div>
+            
+            {/* Tech Stack */}
+            <div className="flex flex-wrap gap-2 mb-4">
+              {currentProject.tech.map((tech) => (
+                <span
+                  key={tech}
+                  className="px-3 py-1 bg-white/20 rounded-full text-white/90 text-sm"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+            
+            {/* Progress Indicators */}
+            <div className="flex space-x-2">
+              {portfolioProjects.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleProjectClick(index)}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    index === currentIndex 
+                      ? 'w-8 bg-white' 
+                      : 'w-2 bg-white/40 hover:bg-white/60'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+        
+        {/* Auto-play toggle */}
+        <div className="absolute top-8 right-8 pointer-events-auto">
+          <button
+            onClick={() => setIsAutoPlaying(!isAutoPlaying)}
+            className={`px-4 py-2 rounded-lg backdrop-blur-sm border transition-all duration-300 ${
+              isAutoPlaying 
+                ? 'bg-green-500/20 border-green-500/50 text-green-200' 
+                : 'bg-white/10 border-white/20 text-white/70'
+            }`}
+          >
+            {isAutoPlaying ? 'Auto-play ON' : 'Auto-play OFF'}
+          </button>
+        </div>
       </div>
     </div>
   );
-};
-
-export default PortfolioCarousel;
+}

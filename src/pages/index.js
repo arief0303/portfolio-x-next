@@ -81,9 +81,10 @@ export default function Home() {
       </div>
       <div className='bg-light'>
         <Technologies />
+          <PortfolioCarousel/>
         <div className='flex flex-col items-center justify-center pt-64 md:pt-10 max-w-96'>
         {/* <div className='flex flex-col items-center justify-center min-w-[120px] md:min-w-[180px]'> */}
-          <PortfolioCarousel projects={sampleProjects} />
+          {/* <PortfolioCarousel projects={sampleProjects} /> */}
         </div>
       </div>
       {/* <div className='w-screen h-screen bg-light flex justify-center'>
