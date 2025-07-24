@@ -13,7 +13,7 @@ const Contact = () => {
         />
         <div className='text-center'>
           <h2 className='text-3xl font-bold mb-2 text-black'>Arief R. Syauqie</h2>
-          <h3 className='text-xl font-semibold mb-4 text-gray-600'>Creative Technologist</h3>
+          <h3 className='text-xl font-semibold mb-4 text-gray-600'>Creative Technologist | Medior Fullstack Developer</h3>
         </div>
       </div>
       <div className='text-left'>
